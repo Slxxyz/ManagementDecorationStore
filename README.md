@@ -1,1 +1,1 @@
-# Gestion-d-un-magasin-de-d-coration
+# Gestion-d-un-magasin-de-décoration
