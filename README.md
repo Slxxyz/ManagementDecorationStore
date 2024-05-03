@@ -1,1 +1,1 @@
-# Gestion-d-un-magasin-de-décoration
+# Gestion d'un magasin de décoration
