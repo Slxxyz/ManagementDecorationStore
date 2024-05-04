@@ -8,4 +8,22 @@ public class OrderLine {
         this.code = code;
         this.quantity = quantity;
     }
+    //////////////////////////////////////////////////////////////////GETTERS
+    public int getCode() {
+        return code;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    //////////////////////////////////////////////////////////////////SETTERS
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
