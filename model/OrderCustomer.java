@@ -13,4 +13,32 @@ public class OrderCustomer {
         this.methodOfPayement = methodOfPayement;
     }
 
+    //////////////////////////////////////////////////////////////////GETTERS
+    public int getCode() {
+        return code;
+    }
+
+    public LocalDateTime getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public String getMethodOfPayement() {
+        return methodOfPayement;
+    }
+
+    //////////////////////////////////////////////////////////////////SETTERS
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setDateAndTime(LocalDateTime dateAndTime) {
+        this.dateAndTime = dateAndTime;
+    }
+
+    public void setMethodOfPayement(String methodOfPayement) {
+        this.methodOfPayement = methodOfPayement;
+    }
+
+
 }
