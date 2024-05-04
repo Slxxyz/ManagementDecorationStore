@@ -8,4 +8,21 @@ public class City {
         this.cityId = cityId;
         this.cityName = cityName;
     }
+
+    //////////////////////////////////////////////////////////////////GETTERS
+    public int getCityId() {
+        return cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+    //////////////////////////////////////////////////////////////////SETTERS
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 }
