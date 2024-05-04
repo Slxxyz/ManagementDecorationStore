@@ -1,38 +1,27 @@
 package model;
 
+public class CheckOut {
+    private int identifier;
+    private String status;
 
-public class Category {
-    private String categoryName;
-    private String description;
-
-    public Category(String categoryName, String description) {
-        this.categoryName = categoryName;
-        this.description = description;
+    public CheckOut(int identifier, String status) {
+        this.identifier = identifier;
+        this.status = status;
     }
     //////////////////////////////////////////////////////////////////GETTERS
-    public String getCategoryName() {
-        return categoryName;
+    public int getIdentifier() {
+        return identifier;
     }
 
-    public String getDescription() {
-        return description;
+    public String getStatus() {
+        return status;
     }
     //////////////////////////////////////////////////////////////////SETTERS
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
     }
 
-    public void setDescription(String description) {
-        if(description.isBlank() || description.isEmpty()){
-            this.description = null;
-        }else{
-            this.description = description;
-        }
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return categoryName + "(" +description+ ")";
-    }
-
 }
