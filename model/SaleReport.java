@@ -10,4 +10,24 @@ public class SaleReport {
         this.code = code;
         this.date = date;
     }
+    //////////////////////////////////////////////////////////////////GETTERS
+    public int getCode() {
+        return code;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    //////////////////////////////////////////////////////////////////SETTERS
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+
 }
