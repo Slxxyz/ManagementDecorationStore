@@ -14,4 +14,39 @@ public class SupplierDetail {
         this.unitPrice = unitPrice;
         this.minimumQuantity = minimumQuantity;
     }
+    //////////////////////////////////////////////////////////////////GETTERS
+
+    public LocalDateTime getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public double getMinimumQuantity() {
+        return minimumQuantity;
+    }
+
+    //////////////////////////////////////////////////////////////////SETTERS
+
+    public void setDateAndTime(LocalDateTime dateAndTime) {
+        this.dateAndTime = dateAndTime;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public void setMinimumQuantity(double minimumQuantity) {
+        this.minimumQuantity = minimumQuantity;
+    }
 }
