@@ -5,7 +5,6 @@ import model.Product;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 public class ProductDataBaseAccess {
     //create
     public void createProduct(Product product) throws ProductException {
