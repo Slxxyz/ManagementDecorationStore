@@ -4,11 +4,12 @@ import exception.*;
 import model.Category;
 import java.sql.*;
 import java.util.ArrayList;
+import interfaceAccess.CategoryDataAccess;
 
 
 public class CategoryDataBaseAccess {
     //read
-
+    @Override
     public Category readCategory(String categoryNameId) throws CategoryException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -26,6 +27,7 @@ public class CategoryDataBaseAccess {
     }
 
     //readAll
+    @Override
     public ArrayList<Category> readAllCategories() throws CategoryException {
         try {
             Connection connection = SingletonConnection.getInstance();
