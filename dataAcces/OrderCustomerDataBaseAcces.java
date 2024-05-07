@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 
-public class OrderCustomer {
+public class OrderCustomerDataBaseAcces {
 
     public void createOrderCustomer(OrderCustomer orderCustomer) throws OrderCustomerException {
         try {
