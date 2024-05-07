@@ -2,7 +2,6 @@ package dataAccess;
 
 import exception.*;
 import model.SupplierDetail;
-
 import java.sql.*;
 import java.time.LocalDate;
 
