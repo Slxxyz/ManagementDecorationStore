@@ -41,7 +41,7 @@ public class CategoryDataBaseAccess {
             }
             return categories;
         } catch (SQLException exception) {
-            throw new CategoryException(exception.getMessage(), new OneException(), new ReadException());
+            throw new CategoryException(exception.getMessage(), new AllException(), new ReadException());
         }
     }
 }
