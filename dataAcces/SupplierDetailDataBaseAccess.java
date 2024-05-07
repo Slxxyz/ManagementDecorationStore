@@ -4,10 +4,12 @@ import exception.*;
 import model.SupplierDetail;
 import java.sql.*;
 import java.time.LocalDate;
+import interfaceAccess.SupplierDetailDataAccess;
 
 
 public class SupplierDetailDataBaseAccess {
     //create
+    @Override
     public void createSupplierDetail(SupplierDetail supplierDetail) throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -37,6 +39,7 @@ public class SupplierDetailDataBaseAccess {
         }
     }
     //read
+    @Override
     public SupplierDetail readSupplierDetail(int productCode, String supplierName, LocalDate dateAndTimeId) throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -61,7 +64,7 @@ public class SupplierDetailDataBaseAccess {
     }
 
     //update
-
+    @Override
     public void updateSupplierDetail(SupplierDetail supplierDetail) throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
