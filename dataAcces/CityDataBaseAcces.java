@@ -1,20 +1,18 @@
-package dataAcces;
+package dataAccess;
 
 import exception.*;
-import interfaceAccess.City;
 import model.City;
-import java.sql.Date;
-
 import java.sql.*;
 import java.util.ArrayList;
+import interfaceAccess.CityDataAccess;
 
 
 
-public class CityDataBaseAcces {
+public class CityDataBaseAccess{
     @Override
     public ArrayList<City> readAllCity() throws CityException {
         try {
-            Connection connexion = SingletonConnexion.getInstance();
+            Connection connexion = SingletonConnection.getInstance();
             String query = "SELECT * FROM city;";
             PreparedStatement statement = connexion.prepareStatement(query);
             ResultSet data = statement.executeQuery();
@@ -32,14 +30,10 @@ public class CityDataBaseAcces {
         }
     }
 
-
-
-
-
     @Override
     public City readCity(int id) throws CityException {
         try {
-            Connection connexion = SingletonConnexion.getInstance();
+            Connection connexion = SingletonConnection.getInstance();
             String query = "SELECT * FROM city WHERE cityId = ?;";
 
             PreparedStatement statement = connexion.prepareStatement(query);
@@ -55,7 +49,5 @@ public class CityDataBaseAcces {
             throw new CityException(exception.getMessage(), new OneException(), new ReadException());
         }
     }
-
-
 
 }
