@@ -1,24 +1,16 @@
-package dataAcces;
+package dataAccess;
 
 import exception.*;
-import interfaceAccess.OrderLine;
 import model.OrderLine;
-import java.sql.Date;
-
-
 import java.sql.*;
 import java.util.ArrayList;
+import interfaceAccess.OrderLineDataAccess;
 
-
-
-public class OrderLine {
-
-
-
+public class OrderLineDataBaseAccess {
     @Override
     public void createOrderLine(OrderLine orderLine) throws OrderLineException {
         try {
-            Connection connexion = SingletonConnexion.getInstance();
+            Connection connexion = SingletonConnection.getInstance();
             String query = "INSERT INTO orderLine VALUES (?,?,?,?);";
             PreparedStatement statement = connexion.prepareStatement(query);
             statement.setInt(1, orderLine.getCode());
@@ -35,7 +27,7 @@ public class OrderLine {
     @Override// lis TOUTES les orderLine de la BD
     public ArrayList<OrderLine> readAllOrderLine() throws OrderLineException {
         try {
-            Connection connexion = SingletonConnexion.getInstance();
+            Connection connexion = SingletonConnection.getInstance();
             String query = "SELECT * FROM orderLine;";
             PreparedStatement statement = connexion.prepareStatement(query);
             ResultSet data = statement.executeQuery();
@@ -55,14 +47,10 @@ public class OrderLine {
     }
 
 
-
-
-
-
     @Override //lis tte les order d'un Customer
     public ArrayList<OrderLine> readAllOrderLineFor(Integer orderLineCode) throws OrderLineException {
         try {
-            Connection connexion = SingletonConnexion.getInstance();
+            Connection connexion = SingletonConnection.getInstance();
             String query = "SELECT * FROM orderLine WHERE code = ?;";
             PreparedStatement statement = connexion.prepareStatement(query);
             statement.setInt(1, orderLineCode);
@@ -82,8 +70,4 @@ public class OrderLine {
         }
     }
 
-
-
-
 }
-
