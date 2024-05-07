@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Supplier {
+public class SupplierDataBaseAcces {
 
     @Override
     public void createSupplier(Supplier supplier) throws SupplierException {
