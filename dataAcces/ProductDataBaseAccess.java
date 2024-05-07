@@ -4,9 +4,12 @@ import exception.*;
 import model.Product;
 import java.sql.*;
 import java.util.ArrayList;
+import interfaceAccess.ProductDataAccess;
+
 
 public class ProductDataBaseAccess {
     //create
+    @Override
     public void createProduct(Product product) throws ProductException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -31,6 +34,7 @@ public class ProductDataBaseAccess {
         }
     }
     //read
+    @Override
     public Product readProduct(int codeProduct) throws ProductException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -54,6 +58,7 @@ public class ProductDataBaseAccess {
     }
 
     //update
+    @Override
     public void updateProduct(Product product) throws ProductException {
         try {
             Connection connection = SingletonConnection.getInstance();
@@ -79,6 +84,7 @@ public class ProductDataBaseAccess {
     }
 
     //delete
+    @Override
     public void deleteProduct(int codeProduct) throws ProductException {
         try{
             Connection connection = SingletonConnection.getInstance();
@@ -93,6 +99,7 @@ public class ProductDataBaseAccess {
     }
 
     //readAll
+    @Override
     public ArrayList<Product> readAllProducts() throws ProductException {
         try {
             Connection connection = SingletonConnection.getInstance();
