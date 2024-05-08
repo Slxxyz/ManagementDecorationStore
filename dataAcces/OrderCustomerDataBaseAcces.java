@@ -4,9 +4,8 @@ import exception.*;
 import model.OrderCustomer;
 import java.sql.*;
 import java.util.ArrayList;
-import interfaceAccess.OrderCustomerDataAccess;
 
-public class OrderCustomerDataBaseAcces {
+public class OrderCustomerDataBaseAccess {
 
     public void createOrderCustomer(OrderCustomer orderCustomer) throws OrderCustomerException {
         try {
@@ -15,8 +14,8 @@ public class OrderCustomerDataBaseAcces {
             PreparedStatement statement = connexion.prepareStatement(query);
             statement.setInt(1, orderCustomer.getCode());
             //ICI ON NE TRAITE QUE LA DATE MAIS PAS LE TIME ! il faut trouver une solution
-            statement.setDate(2, Date.valueOf(orderCustomer.getDateAndTime()));
-            statement.setString(3, orderCustomer.getMethodOfPayement());
+            statement.setTimestamp(2, orderCustomer.getDateAndTime());
+            statement.setString(3, orderCustomer.getMethodOfPayment());
             statement.setInt(4, orderCustomer.getCustomer());
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -36,8 +35,8 @@ public class OrderCustomerDataBaseAcces {
             throw new OrderCustomerException(exception.getMessage(), new OneException(), new DeleteException());
         }
     }
-    
-    
+
+
     @Override  //supprime tte les ordrer d'un customer
     public void deleteAllOrderCustomer(Integer customerNumber) throws OrderCustomerException {
         try {
@@ -50,7 +49,7 @@ public class OrderCustomerDataBaseAcces {
             throw new OrderCustomerException(exception.getMessage(), new AllException(), new DeleteException());
         }
     }
-    
+
     @Override// lis TOUTES les orderCustomer de la BD
     public ArrayList<OrderCustomer> readAllOrderCustomer() throws OrderCustomerException {
         try {
@@ -61,9 +60,9 @@ public class OrderCustomerDataBaseAcces {
             ArrayList<OrderCustomer> ordersCustomer = new ArrayList<OrderCustomer>();
             while (data.next()) {
                 int code = data.getInt("code");
-                Date dateAndTime = data.getDate("dateAndTime");
+                Timestamp dateAndTime = data.getTimestamp("dateAndTime");
                 String methodOfPayement = data.getString("methodOfPayement");
-                Integer customer = data.getInt("customer");
+                int customer = data.getInt("customer");
                 OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
                 ordersCustomer.add(orderCustomer);
             }
@@ -84,9 +83,9 @@ public class OrderCustomerDataBaseAcces {
             ArrayList<OrderCustomer> ordersCustomer = new ArrayList<OrderCustomer>();
             while (data.next()) {
                 int code = data.getInt("code");
-                Date dateAndTime = data.getDate("dateAndTime");
+                Timestamp dateAndTime = data.getTimestamp("dateAndTime");
                 String methodOfPayement = data.getString("methodOfPayement");
-                Integer customer = data.getInt("customer");
+                int customer = data.getInt("customer");
                 OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
                 ordersCustomer.add(orderCustomer);
             }
@@ -95,7 +94,7 @@ public class OrderCustomerDataBaseAcces {
             throw new OrderCustomerException(exception.getMessage(), new AllException(), new ReadException());
         }
     }
-    
+
     @Override
     public OrderCustomer readOrderCustomer(int codeOrderCustomer) throws OrderCustomerException {
         try {
@@ -106,9 +105,9 @@ public class OrderCustomerDataBaseAcces {
             ResultSet data = statement.executeQuery();
             data.next();
             int code = data.getInt("code");
-            Date dateAndTime = data.getDate("dateAndTime");
+            Timestamp dateAndTime = data.getTimestamp("dateAndTime");
             String methodOfPayement = data.getString("methodOfPayement");
-            Integer customer = data.getInt("customer");
+            int customer = data.getInt("customer");
             return new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
         } catch (Exception exception) {
             throw new OrderCustomerException(exception.getMessage(), new OneException(), new ReadException());
