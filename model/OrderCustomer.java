@@ -1,18 +1,17 @@
 package model;
 
-import java.time.LocalDateTime;
-
+import java.sql.Timestamp;
 
 public class OrderCustomer {
     private int code;
-    private LocalDateTime dateAndTime;
-    private String methodOfPayement;
+    private Timestamp dateAndTime;
+    private String methodOfPayment;
     private int customer;
 
-    public OrderCustomer(int code, LocalDateTime dateAndTime, String methodOfPayement, int customer) {
+    public OrderCustomer(int code, Timestamp dateAndTime, String methodOfPayment, int customer) {
         this.code = code;
         this.dateAndTime = dateAndTime;
-        this.methodOfPayement = methodOfPayement;
+        this.methodOfPayment = methodOfPayment;
         this.customer = customer;
     }
 
@@ -21,12 +20,12 @@ public class OrderCustomer {
         return code;
     }
 
-    public LocalDateTime getDateAndTime() {
+    public Timestamp getDateAndTime() {
         return dateAndTime;
     }
 
-    public String getMethodOfPayement() {
-        return methodOfPayement;
+    public String getMethodOfPayment() {
+        return methodOfPayment;
     }
 
     public int getCustomer() {
@@ -39,15 +38,17 @@ public class OrderCustomer {
         this.code = code;
     }
 
-    public void setDateAndTime(LocalDateTime dateAndTime) {
+    public void setDateAndTime(Timestamp dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
-    public void setMethodOfPayement(String methodOfPayement) {
-        this.methodOfPayement = methodOfPayement;
+    public void setMethodOfPayment(String methodOfPayment) {
+        this.methodOfPayment = methodOfPayment;
     }
 
     public void setCustomer(int customer) {
         this.customer = customer;
     }
+
+
 }
