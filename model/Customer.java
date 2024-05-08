@@ -2,28 +2,32 @@ package model;
 
 import java.time.LocalDate;
 
+
+
 public class Customer {
     private int number;
     private String lastName;
     private String firstName;
-    private Character gender;
-    private int nbPoints;
+    private String gender;
+    private int pointNb;
     private String telNumber;
     private String mailAddress;
     private LocalDate birthday;
     private Boolean isMarried;
+    private int cityId;
 
 
-    public Customer(int number, String lastName, String firstName, Character gender, int nbPoints, String telNumber, String mailAddress, LocalDate birthday, Boolean isMarried) {
+    public Customer(int number, String lastName, String firstName, String gender, int pointNb, String telNumber, String mailAddress, LocalDate birthday, Boolean isMarried, int cityId) {
         this.number = number;
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
-        this.nbPoints = nbPoints;
+        this.pointNb = pointNb;
         this.telNumber = telNumber;
         this.mailAddress = mailAddress;
         this.birthday = birthday;
         this.isMarried = isMarried;
+        this.cityId = cityId;
     }
 
     //////////////////////////////////////////////////////////////////GETTERS
@@ -39,12 +43,12 @@ public class Customer {
         return firstName;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public int getNbPoints() {
-        return nbPoints;
+    public int getPointNb() {
+        return pointNb;
     }
 
     public String getTelNumber() {
@@ -62,6 +66,10 @@ public class Customer {
     public Boolean getIsMarried() {
         return isMarried;
     }
+
+    public int getCityId() {
+        return cityId;
+    }
     //////////////////////////////////////////////////////////////////SETTERS
     public void setNumber(int number) {
         this.number = number;
@@ -75,12 +83,12 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public void setGender(Character gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public void setNbPoints(int nbPoints) {
-        this.nbPoints = nbPoints;
+    public void setPointNb(int pointNb) {
+        this.pointNb = pointNb;
     }
 
     public void setTelNumber(String telNumber) {
@@ -105,6 +113,10 @@ public class Customer {
 
     public void setIsMarried(Boolean isMarried) {
         this.isMarried = isMarried;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
 }
