@@ -2,15 +2,18 @@ package model;
 
 import java.time.LocalDateTime;
 
+
 public class OrderCustomer {
     private int code;
     private LocalDateTime dateAndTime;
     private String methodOfPayement;
+    private int customer;
 
-    public OrderCustomer(int code, LocalDateTime dateAndTime, String methodOfPayement) {
+    public OrderCustomer(int code, LocalDateTime dateAndTime, String methodOfPayement, int customer) {
         this.code = code;
         this.dateAndTime = dateAndTime;
         this.methodOfPayement = methodOfPayement;
+        this.customer = customer;
     }
 
     //////////////////////////////////////////////////////////////////GETTERS
@@ -24,6 +27,10 @@ public class OrderCustomer {
 
     public String getMethodOfPayement() {
         return methodOfPayement;
+    }
+
+    public int getCustomer() {
+        return customer;
     }
 
     //////////////////////////////////////////////////////////////////SETTERS
@@ -40,5 +47,7 @@ public class OrderCustomer {
         this.methodOfPayement = methodOfPayement;
     }
 
-
+    public void setCustomer(int customer) {
+        this.customer = customer;
+    }
 }
