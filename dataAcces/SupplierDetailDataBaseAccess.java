@@ -22,7 +22,7 @@ public class SupplierDetailDataBaseAccess {
             statement.setInt(1,supplierDetail.getProduct());
             statement.setString(2,supplierDetail.getSupplier());
             //Trouver solution pour LocalDateTime
-            statement.setLocalDateTime(3,supplierDetail.getDateAndTime());
+            statement.setTimestamp(3,supplierDetail.getDateAndTime());
             statement.setInt(4,supplierDetail.getQuantity());
             statement.setDouble(5,supplierDetail.getUnitPrice());
             Integer minimumQuantity = supplierDetail.getMinimumQuantity();
@@ -40,7 +40,7 @@ public class SupplierDetailDataBaseAccess {
     }
     //read
     @Override
-    public SupplierDetail readSupplierDetail(int productCode, String supplierName, LocalDate dateAndTimeId) throws SupplierDetailException {
+    public SupplierDetail readSupplierDetail(int productCode, String supplierName, Timestamp dateAndTimeId) throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
             String query = "SELECT * FROM supplierDetail WHERE product = ? AND supplier=? AND dateAndTime= ?;";
@@ -48,12 +48,12 @@ public class SupplierDetailDataBaseAccess {
             statement.setInt(1, productCode);
             statement.setString(2, supplierName);
             //Trouver solution pour LocalDateTime
-            statement.setLocalDate(3, dateAndTimeId);
+            statement.setTimestamp(3, dateAndTimeId);
             ResultSet data = statement.executeQuery();
             data.next();
             int product = data.getInt("product");
             String supplier = data.getString("supplier");
-            LocalDateTime dateAndTime = data.getLocalDateTime("dateAndTime");
+            Timestamp dateAndTime = data.getTimestamp("dateAndTime");
             int quantity = data.getInt("quantity");
             double unitPrice = data.getDouble("unitPrice");
             Integer minimumQuantity = data.getInt("minimumQuantity");
@@ -77,7 +77,7 @@ public class SupplierDetailDataBaseAccess {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1,supplierDetail.getSupplier());
             //Trouver solution pour LocalDateTime
-            statement.setLocalDateTime(2,supplierDetail.getDateAndTime());
+            statement.setTimestamp(2,supplierDetail.getDateAndTime());
             statement.setInt(3,supplierDetail.getQuantity());
             statement.setDouble(4,supplierDetail.getUnitPrice());
             Integer minimumQuantity = supplierDetail.getMinimumQuantity();
