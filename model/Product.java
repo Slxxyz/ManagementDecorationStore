@@ -1,50 +1,61 @@
 package model;
 
+
+
 public class Product {
     private int code;
-    private String label;
+    private String labelProduct;
     private double unitPriceExcludingTax;
-    private int quantityInStock;
-    private int vATRate;
-    private boolean isFragile;
-    private int loyaltyPointsValue;
 
-    public Product(int code, String label, double unitPriceExcludingTax, int quantityInStock, int vATRate, boolean isFragile, int loyaltyPointsValue) {
+    private int vATRate;
+    private int loyaltyPointsValue;
+    private int quantityInStock;
+    private boolean isFragile;
+    private String category;
+
+
+public Product(int code, String labelProduct, double unitPriceExcludingTax, int vATRate, int loyaltyPointsValue, int quantityInStock, boolean isFragile, String category) {
         this.code = code;
-        this.label = label;
+        this.labelProduct = labelProduct;
         this.unitPriceExcludingTax = unitPriceExcludingTax;
-        this.quantityInStock = quantityInStock;
         this.vATRate = vATRate;
-        this.isFragile = isFragile;
         this.loyaltyPointsValue = loyaltyPointsValue;
+        this.quantityInStock = quantityInStock;
+        this.isFragile = isFragile;
+        this.category = category;
     }
+
     //////////////////////////////////////////////////////////////////GETTERS
     public int getCode() {
         return code;
     }
 
-    public String getLabel() {
-        return label;
+    public String getLabelProduct() {
+        return labelProduct;
     }
 
     public double getUnitPriceExcludingTax() {
         return unitPriceExcludingTax;
     }
 
-    public int getQuantityInStock() {
-        return quantityInStock;
-    }
-
     public int getVATRate() {
         return vATRate;
+    }
+
+    public int getLoyaltyPointsValue() {
+        return loyaltyPointsValue;
+    }
+
+    public int getQuantityInStock() {
+        return quantityInStock;
     }
 
     public boolean getIsFragile() {
         return isFragile;
     }
 
-    public int getLoyaltyPointsValue() {
-        return loyaltyPointsValue;
+    public String getCategory() {
+        return category;
     }
 
     //////////////////////////////////////////////////////////////////SETTERS
@@ -53,30 +64,32 @@ public class Product {
         this.code = code;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setLabelProduct(String label) {
+        this.labelProduct = label;
     }
 
     public void setUnitPriceExcludingTax(double unitPriceExcludingTax) {
         this.unitPriceExcludingTax = unitPriceExcludingTax;
     }
 
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
-    }
-
     public void setVATRate(int vATRate) {
         this.vATRate = vATRate;
-    }
-
-    public void setIsFragile(boolean isFragile) {
-        this.isFragile = isFragile;
     }
 
     public void setLoyaltyPointsValue(int loyaltyPointsValue) {
         this.loyaltyPointsValue = loyaltyPointsValue;
     }
 
+    public void setQuantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
+    }
 
+    public void setIsFragile(boolean isFragile) {
+        this.isFragile = isFragile;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
 }
