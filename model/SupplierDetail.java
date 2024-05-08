@@ -1,19 +1,18 @@
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
-
 
 public class SupplierDetail {
     private int product;
     private String supplier;
-    private LocalDateTime dateAndTime;
+    private Timestamp dateAndTime;
     private int quantity;
     private double unitPrice;
     private int minimumQuantity;
 
 
-    public SupplierDetail(int product, String supplier, LocalDateTime dateAndTime, int quantity, double unitPrice, int minimumQuantity) {
+    public SupplierDetail(int product, String supplier, Timestamp dateAndTime, int quantity, double unitPrice, int minimumQuantity) {
         this.product = product;
         this.supplier = supplier;
         this.dateAndTime = dateAndTime;
@@ -29,7 +28,7 @@ public class SupplierDetail {
     public String getSupplier() {
         return supplier;
     }
-    public LocalDateTime getDateAndTime() {
+    public Timestamp getDateAndTime() {
         return dateAndTime;
     }
 
@@ -54,7 +53,7 @@ public class SupplierDetail {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-    public void setDateAndTime(LocalDateTime dateAndTime) {
+    public void setDateAndTime(Timestamp dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
