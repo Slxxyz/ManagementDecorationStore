@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-
-
 public class Customer {
     private int number;
     private String lastName;
@@ -17,14 +15,12 @@ public class Customer {
     private int cityId;
 
 
-    public Customer(int number, String lastName, String firstName, String gender, int pointNb, String telNumber, String mailAddress, LocalDate birthday, Boolean isMarried, int cityId) {
+    public Customer(int number, String lastName, String firstName, String gender, int pointNb,LocalDate birthday, Boolean isMarried, int cityId) {
         this.number = number;
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
         this.pointNb = pointNb;
-        this.telNumber = telNumber;
-        this.mailAddress = mailAddress;
         this.birthday = birthday;
         this.isMarried = isMarried;
         this.cityId = cityId;
