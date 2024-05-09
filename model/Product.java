@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class Product {
     private int code;
     private String labelProduct;

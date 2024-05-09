@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class Supplier {
     private String legalName;
     private String streetAndNumber;

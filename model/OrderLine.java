@@ -1,8 +1,5 @@
 package model;
 
-
-
-
 public class OrderLine {
     private int code;
     private int quantity;
