@@ -1,18 +1,16 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.SupplierDetailException;
 import model.SupplierDetail;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-
-public class SupplierDetailDataAccess {
-
-    void createSupplierDetail(SupplierDetail supplierDetail) throws SupplierDetailException 
-
-    SupplierDetail readSupplierDetail(int productCode, String supplierName, LocalDate dateAndTimeId) throws SupplierDetailException 
-       
-    void updateSupplierDetail(SupplierDetail supplierDetail) throws SupplierDetailException 
-     
-
+public interface SupplierDetailDataAccess {
+    //create
+    public void createSupplierDetail(SupplierDetail supplierDetail) throws SupplierDetailException;
+    //read
+    public SupplierDetail readSupplierDetail(int supplierDetailId, String supplierName, Timestamp dateAndTimeId) throws SupplierDetailException;
+    //readAll
+    public ArrayList<SupplierDetail> readAllSupplierDetails() throws SupplierDetailException;
 
 }

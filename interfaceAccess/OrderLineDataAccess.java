@@ -1,17 +1,13 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.OrderLineException;
 import model.OrderLine;
-
 import java.util.ArrayList;
-
-public class OrderLineDataAccess {
-
- void createOrderLine(OrderLine orderLine) throws OrderLineException 
- 
- ArrayList<OrderLine> readAllOrderLine() throws OrderLineException 
-      
- ArrayList<OrderLine> readAllOrderLineFor(Integer orderLineCode) throws OrderLineException 
-
-  
+public interface OrderLineDataAccess {
+    //create
+    public void createOrderLine(OrderLine orderLine) throws OrderLineException;
+    //readAll
+    public ArrayList<OrderLine> readAllOrderLines() throws OrderLineException;
+    //readAllFor
+    public ArrayList<OrderLine> readAllOrderLinesFor(int orderLineCode) throws OrderLineException;
 }

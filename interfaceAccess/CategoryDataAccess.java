@@ -1,14 +1,12 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.CategoryException;
 import model.Category;
-
 import java.util.ArrayList;
 
-public class CategoryDataAccess {
-
-  Category readCategory(String categoryNameId) throws CategoryException 
-  
-  ArrayList<Category> readAllCategories() throws CategoryException 
-      
+public interface CategoryDataAccess {
+    //read
+    public Category readCategory(String categoryNameId) throws CategoryException;
+    //readAll
+    public ArrayList<Category> readAllCategories() throws CategoryException;
 }

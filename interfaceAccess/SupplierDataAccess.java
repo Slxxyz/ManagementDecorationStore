@@ -1,22 +1,19 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.SupplierException;
 import model.Supplier;
-
 import java.util.ArrayList;
 
-public class SupplierDataAccess {
 
-    void createSupplier(Supplier supplier) throws SupplierException 
-  
-    void deleteSupplier(String legalNameSupplier) throws SupplierException 
-   
-    ArrayList<Supplier> readAllSupplier() throws SupplierException 
-    
-    Supplier readSupplier(String legalNameSupplier) throws SupplierException 
-     
-
+public interface SupplierDataAccess {
+    //create
+    public void createSupplier(Supplier supplier) throws SupplierException;
+    //read
+    public Supplier readSupplier(String legalNameSupplier) throws SupplierException;
+    //update
+    public void updateSupplier(Supplier supplier) throws SupplierException;
+    //delete
+    public void deleteSupplier(String legalNameSupplier) throws SupplierException;
+    //read all
+    public ArrayList<Supplier> readAllSupplier() throws SupplierException;
 }
-
-
-

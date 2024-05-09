@@ -1,14 +1,12 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.CityException;
 import model.City;
-
 import java.util.ArrayList;
 
-public class CityDataAccess {
-
-  ArrayList<City> readAllCity() throws CityException
-    
-  City readCity(int id) throws CityException 
-  
+public interface CityDataAccess {
+    //read
+    public City readCity(int city) throws CityException;
+    //readAll
+    public ArrayList<City> readAllCities() throws CityException;
 }

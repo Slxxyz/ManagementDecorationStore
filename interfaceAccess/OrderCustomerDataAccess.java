@@ -1,22 +1,19 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.OrderCustomerException;
 import model.OrderCustomer;
-
 import java.util.ArrayList;
+public interface OrderCustomerDataAccess {
+    //create
+    public void createOrderCustomer(OrderCustomer orderCustomer) throws OrderCustomerException;
+    //read
+    public OrderCustomer readOrderCustomer(int orderCustomerId) throws OrderCustomerException;
+    //delete All Order for a customer
+    public void deleteAllOrderCustomerFor(int customerNumber) throws OrderCustomerException;
 
-public class OrderCustomerDataAccess {
+    //readAll
+    public ArrayList<OrderCustomer> readAllOrderCustomers() throws OrderCustomerException;
+    //readAllOrderCustomerFor
+    public ArrayList<OrderCustomer> readAllOrderCustomerFor(int customerNumber) throws OrderCustomerException;
 
-    void createOrderCustomer(OrderCustomer orderCustomer) throws OrderCustomerException 
-    
-    void deleteOrderCustomer(Integer orderCode) throws OrderCustomerException 
-   
-    void deleteAllOrderCustomer(Integer customerNumber) throws OrderCustomerException 
-   
-    ArrayList<OrderCustomer> readAllOrderCustomer() throws OrderCustomerException 
-   
-    ArrayList<OrderCustomer> readAllOrderCustomerFor(Integer customerNumber) throws OrderCustomerException 
-       
-    OrderCustomer readOrderCustomer(int codeOrderCustomer) throws OrderCustomerException 
-   
 }

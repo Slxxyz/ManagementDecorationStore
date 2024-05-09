@@ -1,30 +1,24 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.CustomerException;
+import exception.NextCodeCustomerException;
+import exception.NumberCustomerException;
 import model.Customer;
-
 import java.util.ArrayList;
+public interface CustomerDataAccess {
+    //create
+    public void createCustomer(Customer customer) throws CustomerException;
+    //read
+    public Customer readCustomer(int numberCustomer) throws CustomerException;
+    //update
+    public void updateCustomer(Customer customer) throws CustomerException;
+    //delete
+    public void deleteCustomer(int numberCustomer) throws CustomerException;
+    //readAll
+    public ArrayList<Customer> readAllCustomers() throws CustomerException;
+    //getNextCode
+    public int getNextCode() throws NextCodeCustomerException;
+    //getNumberCustomer
+    public int getNumberCustomer() throws NumberCustomerException;
 
-public class CustomerDataAccess {
-
-    void createCustomer(Customer customer) throws CustomerException 
-    
-    Customer readCustomer() throws CustomerException 
-
-   
-    void updateCustomer(Customer customer) throws CustomerException 
-      
-  
-    void deleteCustomer(int numberCustomer) throws CustomerException 
-
-   
-    ArrayList<Customer> readAllCustomer() throws CustomerException 
-     
-    
-    int getNextCode() throws NextCodeCustomerException 
-   
-    
-    int getNumberCustomer() throws NumberCustomerException 
-     
-  
 }

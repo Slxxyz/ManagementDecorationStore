@@ -1,27 +1,17 @@
 package interfaceAccess;
 
-import exception.*;
+import exception.ProductException;
 import model.Product;
-
 import java.util.ArrayList;
-
-public class ProductDataAccess {
-
-    void createProduct(Product product) throws ProductException 
-
-    Product readProduct(int codeProduct) throws ProductException 
-
-    void updateProduct(Product product) throws ProductException 
-  
-    void deleteProduct(int codeProduct) throws ProductException 
-
-    ArrayList<Product> readAllProducts() throws ProductException 
-     
-
+public interface ProductDataAccess {
+    //create
+    public void createProduct(Product product) throws ProductException;
+    //read
+    public Product readProduct(int productId) throws ProductException;
+    //update
+    public void updateProduct(Product product) throws ProductException;
+    //delete
+    public void deleteProduct(int productId) throws ProductException;
+    //readAll
+    public ArrayList<Product> readAllProducts() throws ProductException;
 }
-
-
-
-
-
-
