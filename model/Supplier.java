@@ -4,17 +4,15 @@ public class Supplier {
     private String legalName;
     private String streetAndNumber;
     private String location;
-    private int postalCode;
+    private Integer postalCode;
     private String bankingInformation;
     private String vatNumber;
 
-    public Supplier(String legalName, String streetAndNumber, String location, int postalCode, String bankingInformation, String vatNumber) {
+    public Supplier(String legalName, String streetAndNumber, String location, String bankingInformation) {
         this.legalName = legalName;
         this.streetAndNumber = streetAndNumber;
         this.location = location;
-        this.postalCode = postalCode;
         this.bankingInformation = bankingInformation;
-        this.vatNumber = vatNumber;
     }
     //////////////////////////////////////////////////////////////////GETTERS
 
@@ -30,7 +28,7 @@ public class Supplier {
         return location;
     }
 
-    public int getPostalCode() {
+    public Integer getPostalCode() {
         return postalCode;
     }
 
@@ -56,8 +54,12 @@ public class Supplier {
         this.location = location;
     }
 
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
+    public void setPostalCode(Integer postalCode) {
+        if(postalCode == null || postalCode <= 0){
+            this.postalCode = null;
+        }else{
+            this.postalCode = postalCode;
+        }
     }
 
     public void setBankingInformation(String bankingInformation) {
@@ -65,7 +67,11 @@ public class Supplier {
     }
 
     public void setVatNumber(String vatNumber) {
-        this.vatNumber = vatNumber;
+        if(vatNumber.isBlank() || vatNumber.isEmpty()){
+            this.vatNumber = null;
+        }else{
+            this.vatNumber = vatNumber;
+        }
     }
 
 }

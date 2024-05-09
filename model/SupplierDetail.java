@@ -9,16 +9,15 @@ public class SupplierDetail {
     private Timestamp dateAndTime;
     private int quantity;
     private double unitPrice;
-    private int minimumQuantity;
+    private Integer minimumQuantity;
 
 
-    public SupplierDetail(int product, String supplier, Timestamp dateAndTime, int quantity, double unitPrice, int minimumQuantity) {
+    public SupplierDetail(int product, String supplier, Timestamp dateAndTime, int quantity, double unitPrice) {
         this.product = product;
         this.supplier = supplier;
         this.dateAndTime = dateAndTime;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-        this.minimumQuantity = minimumQuantity;
     }
     //////////////////////////////////////////////////////////////////GETTERS
     public int getProduct() {
@@ -40,7 +39,7 @@ public class SupplierDetail {
         return unitPrice;
     }
 
-    public int getMinimumQuantity() {
+    public Integer getMinimumQuantity() {
         return minimumQuantity;
     }
 
@@ -65,8 +64,12 @@ public class SupplierDetail {
         this.unitPrice = unitPrice;
     }
 
-    public void setMinimumQuantity(int minimumQuantity) {
-        this.minimumQuantity = minimumQuantity;
+    public void setMinimumQuantity(Integer minimumQuantity) {
+        if(minimumQuantity==null || minimumQuantity<=0){
+            this.minimumQuantity = null;
+        }else{
+            this.minimumQuantity = minimumQuantity;
+        }
     }
 
 }

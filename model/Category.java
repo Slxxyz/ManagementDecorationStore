@@ -5,9 +5,8 @@ public class Category {
     private String categoryName;
     private String description;
 
-    public Category(String categoryName, String description) {
+    public Category(String categoryName) {
         this.categoryName = categoryName;
-        this.description = description;
     }
     //////////////////////////////////////////////////////////////////GETTERS
     public String getCategoryName() {
