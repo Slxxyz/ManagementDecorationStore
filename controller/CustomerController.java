@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class CustomerController {
     private CustomerManager manager;
+
     public CustomerController() {
         setManager(new CustomerManager());
     }
