@@ -1,5 +1,8 @@
 package business;
 
+import exception.NextCodeOrderCustomerException;
+import exception.NumberOrderCustomerException;
+import exception.OrderCustomerException;
 import interfaceAccess.OrderCustomerDataAccess;
 import dataAccess.OrderCustomerDataBaseAccess;
 import model.OrderCustomer;
@@ -24,6 +27,10 @@ public class OrderCustomerManager {
     public OrderCustomer readOrderCustomer(int orderCustomerId) throws OrderCustomerException{
         return this.customerAccess.readOrderCustomer(orderCustomerId);
     }
+    //delete
+    public void deleteOrderCustomer(int orderCustomerId) throws OrderCustomerException{
+        this.customerAccess.deleteOrderCustomer(orderCustomerId);
+    }
     //delete All Order for a customer
     public void deleteAllOrderCustomerFor(int customerNumber) throws OrderCustomerException{
         this.customerAccess.deleteAllOrderCustomerFor(customerNumber);
@@ -35,5 +42,13 @@ public class OrderCustomerManager {
     //readAllOrderCustomerFor
     public ArrayList<OrderCustomer> readAllOrderCustomerFor(int customerNumber) throws OrderCustomerException{
         return this.customerAccess.readAllOrderCustomerFor(customerNumber);
+    }
+    //getNextCode
+    public int getNextCode() throws NextCodeOrderCustomerException {
+        return this.customerAccess.getNextCode();
+    }
+    //getNumberOrderCustomer
+    public int getNumberOrderCustomer() throws NumberOrderCustomerException {
+        return this.customerAccess.getNumberOrderCustomer();
     }
 }

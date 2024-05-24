@@ -1,5 +1,6 @@
 package business;
 
+import exception.NextCodeOrderLineException;
 import interfaceAccess.OrderLineDataAccess;
 import dataAccess.OrderLineDataBaseAccess;
 import exception.OrderLineException;
@@ -25,6 +26,14 @@ public class OrderLineManager {
     //readAllFor
     public ArrayList<OrderLine> readAllOrderLinesFor(int orderLineCode) throws OrderLineException{
         return this.orderLineAccess.readAllOrderLinesFor(orderLineCode);
+    }
+    //deleteAllFor
+    public void deleteAllOrderLinesFor(int orderLineCode) throws OrderLineException{
+        this.orderLineAccess.deleteAllOrderLinesFor(orderLineCode);
+    }
+    //getNextCode
+    public int getNextCode() throws NextCodeOrderLineException {
+        return this.orderLineAccess.getNextCode();
     }
 
 }
