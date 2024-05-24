@@ -15,7 +15,7 @@ public class SupplierDetailDataBaseAccess implements SupplierDetailDataAccess{
             Connection connection = SingletonConnection.getInstance();
             String query =
                     """
-                    INSERT INTO supplierDetail
+                    INSERT INTO supplierdetail
                     VALUES (?,?,?,?,?,?);
                     """;
             PreparedStatement statement = connection.prepareStatement(query);
@@ -42,7 +42,7 @@ public class SupplierDetailDataBaseAccess implements SupplierDetailDataAccess{
     public SupplierDetail readSupplierDetail(int productCode, String supplierName, Timestamp dateAndTimeId) throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM supplierDetail WHERE product = ? AND supplier=? AND dateAndTime= ?;";
+            String query = "SELECT * FROM supplierdetail WHERE product = ? AND supplier=? AND dateAndTime= ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productCode);
             statement.setString(2, supplierName);
@@ -70,7 +70,7 @@ public class SupplierDetailDataBaseAccess implements SupplierDetailDataAccess{
     public ArrayList<SupplierDetail> readAllSupplierDetails() throws SupplierDetailException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM supplierDetail;";
+            String query = "SELECT * FROM supplierdetail;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet data = statement.executeQuery();
             ArrayList<SupplierDetail> supplierDetails = new ArrayList<SupplierDetail>();

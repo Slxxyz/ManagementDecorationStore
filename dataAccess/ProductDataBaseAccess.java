@@ -38,12 +38,12 @@ public class ProductDataBaseAccess implements ProductDataAccess{
     public Product readProduct(int codeProduct) throws ProductException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM product WHERE code = ?;";
+            String query = "SELECT * FROM product WHERE codeProduct = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, codeProduct);
             ResultSet data = statement.executeQuery();
             data.next();
-            int code = data.getInt("code");
+            int code = data.getInt("codeProduct");
             String labelProduct = data.getString("labelProduct");
             double unitPriceExcludingTax = data.getDouble("unitPriceExcludingTax");
             int vATRate = data.getInt("vATRate");
@@ -66,7 +66,7 @@ public class ProductDataBaseAccess implements ProductDataAccess{
                     """
                     UPDATE product
                     SET labelProduct = ?, unitPriceExcludingTax = ?, vATRate = ?, loyaltyPointsValue = ?, quantityInStock = ?, isFragile = ?, category = ?
-                    WHERE code = ?;
+                    WHERE codeProduct = ?;
                     """;
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1,product.getLabelProduct());
@@ -88,7 +88,7 @@ public class ProductDataBaseAccess implements ProductDataAccess{
     public void deleteProduct(int codeProduct) throws ProductException {
         try{
             Connection connection = SingletonConnection.getInstance();
-            String query = "DELETE FROM product WHERE code = ?";
+            String query = "DELETE FROM product WHERE codeProduct = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1,codeProduct);
             statement.executeUpdate();
@@ -108,7 +108,7 @@ public class ProductDataBaseAccess implements ProductDataAccess{
             ResultSet data = statement.executeQuery(query);
             ArrayList<Product> products = new ArrayList<Product>();
             while (data.next()) {
-                int code = data.getInt("code");
+                int code = data.getInt("codeProduct");
                 String labelProduct = data.getString("labelProduct");
                 double unitPriceExcludingTax = data.getDouble("unitPriceExcludingTax");
                 int vATRate = data.getInt("vATRate");

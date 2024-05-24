@@ -48,14 +48,14 @@ public class SupplierDataBaseAccess implements SupplierDataAccess{
             data.next();
             String legalName = data.getString("legalName");
             String streetAndNumber = data.getString("streetAndNumber");
-            String city = data.getString("city");
+            String city = data.getString("location");
             String bankingInformation = data.getString("bankingInformation");
             Supplier supplier = new Supplier(legalName, streetAndNumber, city, bankingInformation);
             Integer postalCode = data.getInt("postalCode");
             if (!data.wasNull()) {
                 supplier.setPostalCode(postalCode);
             }
-            String vATNumber = data.getString("vATNumber");
+            String vATNumber = data.getString("vatNumber");
             if (!data.wasNull()) {
                 supplier.setVatNumber(vATNumber);
             }
@@ -72,7 +72,7 @@ public class SupplierDataBaseAccess implements SupplierDataAccess{
     public void updateSupplier(Supplier supplier) throws SupplierException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "UPDATE supplier SET streetAndNumber = ?, city = ?, postalCode = ?, bankingInformation = ?, vATNumber = ? WHERE legalName = ?";
+            String query = "UPDATE supplier SET streetAndNumber = ?, location = ?, postalCode = ?, bankingInformation = ?, vatNumber = ? WHERE legalName = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, supplier.getStreetAndNumber());
             statement.setString(2, supplier.getLocation());
@@ -122,7 +122,7 @@ public class SupplierDataBaseAccess implements SupplierDataAccess{
             while (data.next()) {
                 String legalName = data.getString("legalName");
                 String streetAndNumber = data.getString("streetAndNumber");
-                String city = data.getString("city");
+                String city = data.getString("location");
                 String bankingInformation = data.getString("bankingInformation");
                 Supplier supplier = new Supplier(legalName, streetAndNumber, city, bankingInformation);
 
@@ -130,7 +130,7 @@ public class SupplierDataBaseAccess implements SupplierDataAccess{
                 if (!data.wasNull()) {
                     supplier.setPostalCode(postalCode);
                 }
-                String vATNumber = data.getString("vATNumber");
+                String vATNumber = data.getString("vatNumber");
                 if (!data.wasNull()) {
                     supplier.setVatNumber(vATNumber);
                 }

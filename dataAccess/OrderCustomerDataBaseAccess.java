@@ -12,7 +12,7 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public void createOrderCustomer(OrderCustomer orderCustomer) throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "INSERT INTO orderCustomer VALUES (?,?,?,?);";
+            String query = "INSERT INTO ordercustomer VALUES (?,?,?,?);";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, orderCustomer.getCode());
             statement.setTimestamp(2, orderCustomer.getDateAndTime());
@@ -27,18 +27,31 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public OrderCustomer readOrderCustomer(int codeOrderCustomer) throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderCustomer WHERE code = ?";
+            String query = "SELECT * FROM ordercustomer WHERE codeOrder = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, codeOrderCustomer);
             ResultSet data = statement.executeQuery();
             data.next();
-            int code = data.getInt("code");
+            int code = data.getInt("codeOrder");
             Timestamp dateAndTime = data.getTimestamp("dateAndTime");
-            String methodOfPayement = data.getString("methodOfPayement");
+            String methodOfPayment = data.getString("methodOfPayement");
             int customer = data.getInt("customer");
-            return new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
+            return new OrderCustomer(code,dateAndTime,methodOfPayment,customer);
         } catch (Exception exception) {
             throw new OrderCustomerException(exception.getMessage(), new OneException(), new ReadException());
+        }
+    }
+
+    @Override
+    public void deleteOrderCustomer(int codeOrderCustomer) throws OrderCustomerException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "DELETE FROM ordercustomer WHERE codeOrder = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, codeOrderCustomer);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new OrderCustomerException(exception.getMessage(), new OneException(), new DeleteException());
         }
     }
 
@@ -47,7 +60,7 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public void deleteAllOrderCustomerFor(int customerNumber) throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "DELETE FROM orderCustomer WHERE customer = ?;";
+            String query = "DELETE FROM ordercustomer WHERE customer = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, customerNumber);
             statement.executeUpdate();
@@ -60,16 +73,16 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public ArrayList<OrderCustomer> readAllOrderCustomers() throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderCustomer;";
+            String query = "SELECT * FROM ordercustomer;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet data = statement.executeQuery();
             ArrayList<OrderCustomer> ordersCustomer = new ArrayList<OrderCustomer>();
             while (data.next()) {
-                int code = data.getInt("code");
+                int code = data.getInt("codeOrder");
                 Timestamp dateAndTime = data.getTimestamp("dateAndTime");
-                String methodOfPayement = data.getString("methodOfPayement");
+                String methodOfPayment = data.getString("methodOfPayement");
                 int customer = data.getInt("customer");
-                OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
+                OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayment,customer);
                 ordersCustomer.add(orderCustomer);
             }
             return ordersCustomer;
@@ -82,17 +95,17 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public ArrayList<OrderCustomer> readAllOrderCustomerFor(int customerNumber) throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderCustomer WHERE customer = ?;";
+            String query = "SELECT * FROM ordercustomer WHERE customer = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, customerNumber);
             ResultSet data = statement.executeQuery();
             ArrayList<OrderCustomer> ordersCustomer = new ArrayList<OrderCustomer>();
             while (data.next()) {
-                int code = data.getInt("code");
+                int code = data.getInt("codeOrder");
                 Timestamp dateAndTime = data.getTimestamp("dateAndTime");
-                String methodOfPayement = data.getString("methodOfPayement");
+                String methodOfPayment = data.getString("methodOfPayement");
                 int customer = data.getInt("customer");
-                OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayement,customer);
+                OrderCustomer orderCustomer = new OrderCustomer(code,dateAndTime,methodOfPayment,customer);
                 ordersCustomer.add(orderCustomer);
             }
             return ordersCustomer;
@@ -101,5 +114,32 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
         }
     }
 
+    @Override
+    public int getNextCode() throws NextCodeOrderCustomerException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "SELECT MAX(codeOrder) AS 'NEXT_CODE' FROM ordercustomer;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            return data.getInt("NEXT_CODE") + 1;
+        } catch (SQLException exception) {
+            throw new NextCodeOrderCustomerException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int getNumberOrderCustomer() throws NumberOrderCustomerException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "SELECT COUNT(*) AS 'NUMBER_ORDER_CUSTOMER' FROM ordercustomer;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            return data.getInt("NUMBER_ORDER_CUSTOMER");
+        } catch (SQLException exception) {
+            throw new NumberOrderCustomerException(exception.getMessage());
+        }
+    }
 
 }

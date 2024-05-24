@@ -11,7 +11,7 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
     public void createOrderLine(OrderLine orderLine) throws OrderLineException {
         try {
             Connection connexion = SingletonConnection.getInstance();
-            String query = "INSERT INTO orderLine VALUES (?,?,?,?);";
+            String query = "INSERT INTO orderline VALUES (?,?,?,?);";
             PreparedStatement statement = connexion.prepareStatement(query);
             statement.setInt(1, orderLine.getCode());
             statement.setInt(2, orderLine.getQuantity());
@@ -28,12 +28,12 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
     public ArrayList<OrderLine> readAllOrderLines() throws OrderLineException {
         try {
             Connection connexion = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderLine;";
+            String query = "SELECT * FROM orderline;";
             PreparedStatement statement = connexion.prepareStatement(query);
             ResultSet data = statement.executeQuery();
             ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
             while (data.next()) {
-                int code = data.getInt("code");
+                int code = data.getInt("codeOrderLine");
                 int quantity = data.getInt("quantity");
                 int orderCustomer = data.getInt("orderCustomer");
                 int product= data.getInt("product");
@@ -47,17 +47,17 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
     }
 
 
-    @Override //lis tte les order d'un Customer
+    @Override //lis toutes les orderLine d'un order
     public ArrayList<OrderLine> readAllOrderLinesFor(int orderLineCode) throws OrderLineException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderLine WHERE code = ?;";
+            String query = "SELECT * FROM orderline WHERE code = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, orderLineCode);
             ResultSet data = statement.executeQuery();
             ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
             while (data.next()) {
-                int code = data.getInt("code");
+                int code = data.getInt("codeOrderLine");
                 int quantity = data.getInt("quantity");
                 int orderCustomer = data.getInt("orderCustomer");
                 int product= data.getInt("product");
@@ -67,6 +67,37 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
             return orderLines;
         } catch (SQLException exception) {
             throw new OrderLineException(exception.getMessage(), new AllException(), new ReadException());
+        }
+    }
+
+    //supprime toutes les orderLine d'un order
+    @Override
+    public void deleteAllOrderLinesFor(int orderCode) throws OrderLineException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "DELETE FROM orderline WHERE orderCustomer = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, orderCode);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new OrderLineException(exception.getMessage(), new AllException(), new DeleteException());
+        }
+    }
+
+    //retourne le prochain code d'orderLine
+    @Override
+    public int getNextCode() throws NextCodeOrderLineException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "SELECT MAX(codeOrderLine) AS 'NEXT_CODE' FROM orderline;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet data = statement.executeQuery();
+            if (data.next()) {
+                return data.getInt("NEXT_CODE") + 1;
+            }
+            return 1;
+        } catch (SQLException exception) {
+            throw new NextCodeOrderLineException(exception.getMessage());
         }
     }
 
