@@ -8,8 +8,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel currentPanel;
     private static final int SCREEN_RESOLUTION_X = 1920;
     private static final int SCREEN_RESOLUTION_Y = 1080;
-    private static final int WINDOWS_RESOLUTION_X = 700;
-    private static final int WINDOWS_RESOLUTION_Y = 500;
+    private static final int WINDOWS_RESOLUTION_X = 1280;
+    private static final int WINDOWS_RESOLUTION_Y = 730;
 
     public MainFrame() {
         this.currentPanel = new WelcomePanel();
@@ -53,26 +53,26 @@ public class MainFrame extends JFrame implements ActionListener {
 
         jobTask.add(stockInformation);
 
-        JMenu colorThread = new JMenu("LED multicouleur");
-        JMenuItem colorLED = new JMenuItem("LED multicouleur");
+        JMenu newProductThread = new JMenu("Nouveaux produits");
+        JMenuItem newProduct = new JMenuItem("Nouveaux produits");
 
-        colorThread.addActionListener(this);
-        colorLED.addActionListener(this);
+        newProductThread.addActionListener(this);
+        newProduct.addActionListener(this);
 
-        colorThread.add(colorLED);
+        newProductThread.add(newProduct);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(crud);
         menuBar.add(search);
         menuBar.add(jobTask);
-        menuBar.add(colorThread);
+        menuBar.add(newProductThread);
 
         this.setJMenuBar(menuBar);
         this.addWindowListener(new MainFrameListener());
 
         this.setBounds(
-                (SCREEN_RESOLUTION_X / 2) - (WINDOWS_RESOLUTION_X / 2),
-                (SCREEN_RESOLUTION_Y / 2) - (WINDOWS_RESOLUTION_Y / 2),
+                (SCREEN_RESOLUTION_X - WINDOWS_RESOLUTION_X) / 5,
+                (SCREEN_RESOLUTION_Y - WINDOWS_RESOLUTION_Y) / 5,
                 WINDOWS_RESOLUTION_X,
                 WINDOWS_RESOLUTION_Y
         );
@@ -80,20 +80,24 @@ public class MainFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    private JPanel gePanel(String name) {
+
+//TODO: Création d'objet peut être redondante (fix: avec un State Pattern)
+
+    private JPanel getPanel(String name) {
         switch (name) {
             case "Ajout d'un client" -> {
-                return new
+                return new AddCustomerPanel();
             }
             case "Affichage des clients" -> {
-                return new
+                return new ListingCustomerPanel(); //good
             }
             case "Modification d'un client" -> {
-                return new
+                return new EditCustomerPanel();
             }
             case "Suppression d'un client" -> {
-                return new
+                return new DeleteCustomerPanel();
             }
+            /*
             case "Commandes" -> {
                 return new
             }
@@ -106,12 +110,18 @@ public class MainFrame extends JFrame implements ActionListener {
             case "Afficher les informations de stock" -> {
                 return new
             }
-            case "LED multicouleur" -> {
-                LEDPanel ledPanel = new LEDPanel();
-                LEDMovingThread multicolorThread = new LEDMovingThread(ledPanel);
-                multicolorThread.start();
-
-                return ledPanel;
+            */
+            case "Nouveaux produits" -> {
+                // TODO : Nous n'avons pas eu le temps de faire un systeme plus qualitatif :(
+                CoverPageManager[] products = {
+                        new CoverPageManager("Montagne Enneigée", "../tableau.jpg","Voyager sans bouger, c'est possible désormais !"),
+                        new CoverPageManager("PapyMamy Lampe", "../lampe.jpeg",    "Retour vers le passé, pour un futur lumineux !"),
+                        new CoverPageManager("Moderna Blocusa", "../chair.jpeg",   "Chaise moderne pour un blocus plus confortable !")
+                };
+                ProductPanel productPanel = new ProductPanel(products[0]);
+                ProductDisplayThread displayThread = new ProductDisplayThread(productPanel, products);
+                displayThread.start();
+                return productPanel;
             }
         }
         return null;
@@ -123,7 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
         if (currentPanel != null) {
             this.remove(currentPanel);
         }
-        currentPanel = this.gePanel(action);
+        currentPanel = this.getPanel(action);
         this.add(currentPanel);
         this.revalidate();
         this.repaint();
