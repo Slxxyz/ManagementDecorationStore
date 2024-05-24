@@ -1,10 +1,9 @@
 package model;
 
 public class Product {
-    private int code;
+    private int codeProduct;
     private String labelProduct;
     private double unitPriceExcludingTax;
-
     private int vATRate;
     private int loyaltyPointsValue;
     private int quantityInStock;
@@ -12,8 +11,8 @@ public class Product {
     private String category;
 
 
-public Product(int code, String labelProduct, double unitPriceExcludingTax, int vATRate, int loyaltyPointsValue, int quantityInStock, boolean isFragile, String category) {
-        this.code = code;
+public Product(int codeProduct, String labelProduct, double unitPriceExcludingTax, int vATRate, int loyaltyPointsValue, int quantityInStock, boolean isFragile, String category) {
+        this.codeProduct = codeProduct;
         this.labelProduct = labelProduct;
         this.unitPriceExcludingTax = unitPriceExcludingTax;
         this.vATRate = vATRate;
@@ -25,7 +24,7 @@ public Product(int code, String labelProduct, double unitPriceExcludingTax, int 
 
     //////////////////////////////////////////////////////////////////GETTERS
     public int getCode() {
-        return code;
+        return codeProduct;
     }
 
     public String getLabelProduct() {
@@ -58,8 +57,8 @@ public Product(int code, String labelProduct, double unitPriceExcludingTax, int 
 
     //////////////////////////////////////////////////////////////////SETTERS
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(int codeProduct) {
+        this.codeProduct = codeProduct;
     }
 
     public void setLabelProduct(String label) {
@@ -88,6 +87,11 @@ public Product(int code, String labelProduct, double unitPriceExcludingTax, int 
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return labelProduct;
     }
 
 }

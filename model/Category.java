@@ -3,7 +3,7 @@ package model;
 
 public class Category {
     private String categoryName;
-    private String description;
+    private String descriptionCategory;
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
@@ -14,24 +14,24 @@ public class Category {
     }
 
     public String getDescription() {
-        return description;
+        return descriptionCategory;
     }
     //////////////////////////////////////////////////////////////////SETTERS
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public void setDescription(String description) {
-        if(description.isBlank() || description.isEmpty()){
-            this.description = null;
+    public void setDescription(String descriptionCategory) {
+        if(descriptionCategory.isBlank() || descriptionCategory.isEmpty()){
+            this.descriptionCategory = null;
         }else{
-            this.description = description;
+            this.descriptionCategory = descriptionCategory;
         }
     }
 
     @Override
     public String toString() {
-        return categoryName + "(" +description+ ")";
+        return categoryName + "(" +descriptionCategory+ ")";
     }
 
 }

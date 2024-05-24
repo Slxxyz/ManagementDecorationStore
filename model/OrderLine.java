@@ -1,20 +1,20 @@
 package model;
 
 public class OrderLine {
-    private int code;
+    private int codeOrderLine;
     private int quantity;
     private int orderCustomer;
     private int product;
 
-    public OrderLine(int code, int quantity, int orderCustomer, int product) {
-        this.code = code;
+    public OrderLine(int codeOrderLine, int quantity, int orderCustomer, int product) {
+        this.codeOrderLine = codeOrderLine;
         this.quantity = quantity;
         this.orderCustomer = orderCustomer;
         this.product = product;
     }
     //////////////////////////////////////////////////////////////////GETTERS
     public int getCode() {
-        return code;
+        return codeOrderLine;
     }
 
     public int getQuantity() {
@@ -31,8 +31,8 @@ public class OrderLine {
 
     //////////////////////////////////////////////////////////////////SETTERS
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(int codeOrderLine) {
+        this.codeOrderLine = codeOrderLine;
     }
 
     public void setQuantity(int quantity) {

@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Customer {
-    private int number;
+    private int numberCustomer;
     private String lastName;
     private String firstName;
     private String gender;
@@ -15,8 +15,8 @@ public class Customer {
     private int cityId;
 
 
-    public Customer(int number, String lastName, String firstName, String gender, int pointNb,LocalDate birthday, Boolean isMarried, int cityId) {
-        this.number = number;
+    public Customer(int numberCustomer, String lastName, String firstName, String gender, int pointNb,LocalDate birthday, Boolean isMarried, int cityId) {
+        this.numberCustomer = numberCustomer;
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
@@ -28,7 +28,7 @@ public class Customer {
 
     //////////////////////////////////////////////////////////////////GETTERS
     public int getNumber() {
-        return number;
+        return numberCustomer;
     }
 
     public String getLastName() {
@@ -67,8 +67,8 @@ public class Customer {
         return cityId;
     }
     //////////////////////////////////////////////////////////////////SETTERS
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumber(int numberCustomer) {
+        this.numberCustomer = numberCustomer;
     }
 
     public void setLastName(String lastName) {
@@ -113,6 +113,11 @@ public class Customer {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    @Override
+    public String toString() {
+        return lastName + " " + firstName;
     }
 
 }
