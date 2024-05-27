@@ -45,16 +45,13 @@ public class OrderCustomerPanel extends JPanel  {
     }
 
     protected OrderCustomer getOrderCustomer(int nextCode) {
-        Timestamp dateAndTime = new Timestamp(((SpinnerDateModel)dateAndTimeField.getModel()).getDate().getTime());
         String methodOfPayment = methodOfPaymentField.getText();
-        if(methodOfPayment!=null){
+        if(!methodOfPayment.isBlank() && !methodOfPayment.isEmpty()){
+            Timestamp dateAndTime = new Timestamp(((SpinnerDateModel)dateAndTimeField.getModel()).getDate().getTime());
             try {
-                int code = -1;
-                code = orderCustomerController.getNextCode();
-                int currentCustomerCode = customerController.getNumberCustomer();
-
-                return new OrderCustomer(code, dateAndTime, methodOfPayment, currentCustomerCode);
-            } catch (NextCodeOrderCustomerException | NumberCustomerException e) {
+                int currentCustomerCode = customerController.getNextCode();
+                return new OrderCustomer(nextCode, dateAndTime, methodOfPayment, currentCustomerCode);
+            } catch (NextCodeCustomerException e) {
                 JOptionPane.showMessageDialog(null, "Veuillez réessayer ultérieurement... code:500", "Erreur lors de la creation de la commande", JOptionPane.ERROR_MESSAGE);
             }
 

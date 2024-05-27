@@ -206,7 +206,7 @@ public class GeneralCustomerPanel extends JPanel{
         String lastName= this.getLastName();
         if(!lastName.isBlank() && !lastName.isEmpty()){
             String firstName = this.getFirstName();
-            if(firstName!=null){
+            if(!firstName.isBlank() && !firstName.isEmpty()){
                 String gender = this.getGender();
                 int pointNb = this.getPointNb();
                 String telNumber = this.getTelNumber();

@@ -46,6 +46,7 @@ public class DeleteCustomerPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event){
         String source = event.getActionCommand();
         if(source.equals("Supprimer")){
+            //Si un jour on souhaite pouvoir supprimer plusieurs clients en même temps
             int[] selectedRows = this.listSelectionModelCustomer.getSelectedIndices();
             if(selectedRows.length>0){
                 try{
@@ -54,12 +55,10 @@ public class DeleteCustomerPanel extends JPanel implements ActionListener {
                         ArrayList<Customer> customers = customerController.readAllCustomers();
                         for (int selectedRow : selectedRows) {
                             int numberCustomer = customers.get(selectedRow).getNumber();
-                            ArrayList<OrderCustomer> orderCustomers = orderCustomerController.readAllOrderCustomers();
+                            ArrayList<OrderCustomer> orderCustomers = orderCustomerController.readAllOrderCustomerFor(numberCustomer);
                             for (OrderCustomer orderCustomer : orderCustomers) {
-                                if (orderCustomer.getCustomer() == numberCustomer) {
-                                    this.orderLineController.deleteAllOrderLinesFor(orderCustomer.getCode());
-                                    this.orderCustomerController.deleteOrderCustomer(numberCustomer);
-                                }
+                                this.orderLineController.deleteAllOrderLinesFor(orderCustomer.getCode());
+                                this.orderCustomerController.deleteOrderCustomer(orderCustomer.getCode());
                             }
                             this.customerController.deleteCustomer(numberCustomer);
                         }
