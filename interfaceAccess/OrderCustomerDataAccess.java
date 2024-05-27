@@ -1,5 +1,6 @@
 package interfaceAccess;
 
+import exception.NextCodeCustomerException;
 import exception.OrderCustomerException;
 import exception.NextCodeOrderCustomerException;
 import exception.NumberOrderCustomerException;
@@ -25,5 +26,7 @@ public interface OrderCustomerDataAccess {
     public int getNextCode() throws NextCodeOrderCustomerException;
     //getNumberOrderCustomer
     public int getNumberOrderCustomer() throws NumberOrderCustomerException;
+    //getLastOrderCustomer
+    public int getLastOrderCustomerId() throws NextCodeOrderCustomerException;
 
 }

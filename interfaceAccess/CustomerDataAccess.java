@@ -20,5 +20,7 @@ public interface CustomerDataAccess {
     public int getNextCode() throws NextCodeCustomerException;
     //getNumberCustomer
     public int getNumberCustomer() throws NumberCustomerException;
+    //getLastCustomer
 
+    public int getLastCustomerId() throws NextCodeCustomerException;
 }
