@@ -45,4 +45,8 @@ public class CustomerController {
     public int getNumberCustomer() throws NumberCustomerException{
         return this.manager.getNumberCustomer();
     }
+    //getLastCustomerId
+    public int getLastCustomerId() throws NextCodeCustomerException {
+        return this.manager.getLastCustomerId();
+    }
 }

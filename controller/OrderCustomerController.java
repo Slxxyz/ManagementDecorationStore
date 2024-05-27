@@ -1,7 +1,6 @@
 package controller;
 
 import business.OrderCustomerManager;
-import exception.NextCodeCustomerException;
 import exception.NextCodeOrderCustomerException;
 import exception.NumberOrderCustomerException;
 import exception.OrderCustomerException;
@@ -46,6 +45,10 @@ public class OrderCustomerController {
     //getNumberOrderCustomer
     public int getNumberOrderCustomer() throws NumberOrderCustomerException {
         return this.manager.getNumberOrderCustomer();
+    }
+    //getLastOrderCustomer
+    public int getLastOrderCustomerId() throws NextCodeOrderCustomerException {
+        return this.manager.getLastOrderCustomerId();
     }
 
 }
