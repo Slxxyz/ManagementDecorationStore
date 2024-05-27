@@ -47,7 +47,7 @@ public class CustomerDataBaseAccess implements CustomerDataAccess{
             statement.executeUpdate();
 
         } catch (SQLException exception) {
-            throw new CustomerException(exception.getMessage(), new OneException(), new CreateException());
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Attention !!!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -146,7 +146,7 @@ public class CustomerDataBaseAccess implements CustomerDataAccess{
             statement.executeUpdate();
 
         } catch(SQLException exception) {
-            throw new CustomerException(exception.getMessage(), new OneException(), new DeleteException());
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Attention !!!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -193,15 +193,17 @@ public class CustomerDataBaseAccess implements CustomerDataAccess{
     public int getNextCode() throws NextCodeCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT MAX(numberCustomer) AS 'NEXT_NUMBER' FROM customer;";
+            String query = "SELECT numberCustomer FROM customer ORDER BY numberCustomer DESC LIMIT 1;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet data = statement.executeQuery();
             data.next();
-            return data.getInt("NEXT_NUMBER") + 1;
+            return data.getInt("numberCustomer")+1;
+
         } catch (SQLException exception) {
             throw new NextCodeCustomerException(exception.getMessage());
         }
     }
+
 
     @Override
     public int getNumberCustomer() throws NumberCustomerException {
@@ -214,6 +216,21 @@ public class CustomerDataBaseAccess implements CustomerDataAccess{
             return data.getInt("NUMBER_CUSTOMER");
         }catch(SQLException exception){
             throw new NumberCustomerException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int getLastCustomerId() throws NextCodeCustomerException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "SELECT numberCustomer FROM customer ORDER BY numberCustomer DESC LIMIT 1;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet data = statement.executeQuery();
+           data.next();
+            return data.getInt("numberCustomer");
+
+        } catch (SQLException exception) {
+            throw new NextCodeCustomerException(exception.getMessage());
         }
     }
 }

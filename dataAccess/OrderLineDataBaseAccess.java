@@ -89,13 +89,11 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
     public int getNextCode() throws NextCodeOrderLineException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT MAX(codeOrderLine) AS 'NEXT_CODE' FROM orderline;";
+            String query = "SELECT codeOrderLine FROM orderline ORDER BY codeOrderLine DESC LIMIT 1;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet data = statement.executeQuery();
-            if (data.next()) {
-                return data.getInt("NEXT_CODE") + 1;
-            }
-            return 1;
+            data.next();
+            return data.getInt("codeOrderLine") + 1;
         } catch (SQLException exception) {
             throw new NextCodeOrderLineException(exception.getMessage());
         }

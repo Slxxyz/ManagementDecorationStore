@@ -95,7 +95,7 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public ArrayList<OrderCustomer> readAllOrderCustomerFor(int customerNumber) throws OrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM ordercustomer WHERE customer = ?;";
+            String query = "SELECT * FROM ordercustomer WHERE customer=?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, customerNumber);
             ResultSet data = statement.executeQuery();
@@ -118,11 +118,12 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
     public int getNextCode() throws NextCodeOrderCustomerException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT MAX(codeOrder) AS 'NEXT_CODE' FROM ordercustomer;";
+            String query = "SELECT codeOrder FROM ordercustomer ORDER BY codeOrder DESC LIMIT 1;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet data = statement.executeQuery();
             data.next();
-            return data.getInt("NEXT_CODE") + 1;
+            return data.getInt("codeOrder")+1;
+
         } catch (SQLException exception) {
             throw new NextCodeOrderCustomerException(exception.getMessage());
         }
@@ -139,6 +140,21 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
             return data.getInt("NUMBER_ORDER_CUSTOMER");
         } catch (SQLException exception) {
             throw new NumberOrderCustomerException(exception.getMessage());
+        }
+    }
+    // LastOrderCustomerCode
+    @Override
+    public int getLastOrderCustomerId() throws NextCodeOrderCustomerException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String query = "SELECT codeOrder FROM ordercustomer ORDER BY codeOrder DESC LIMIT 1;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet data = statement.executeQuery();
+            data.next();
+            return data.getInt("codeOrder");
+
+        } catch (SQLException exception) {
+            throw new NextCodeOrderCustomerException(exception.getMessage());
         }
     }
 
