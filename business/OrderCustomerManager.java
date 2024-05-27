@@ -6,7 +6,7 @@ import exception.OrderCustomerException;
 import interfaceAccess.OrderCustomerDataAccess;
 import dataAccess.OrderCustomerDataBaseAccess;
 import model.OrderCustomer;
-import exception.OrderCustomerException;
+
 import java.util.ArrayList;
 
 public class OrderCustomerManager {
@@ -50,5 +50,9 @@ public class OrderCustomerManager {
     //getNumberOrderCustomer
     public int getNumberOrderCustomer() throws NumberOrderCustomerException {
         return this.customerAccess.getNumberOrderCustomer();
+    }
+    //getLastOrderCustomer
+    public int getLastOrderCustomerId() throws NextCodeOrderCustomerException {
+        return this.customerAccess.getLastOrderCustomerId();
     }
 }

@@ -44,5 +44,9 @@ private CustomerDataAccess customerAccess;
     public int getNumberCustomer() throws NumberCustomerException {
         return this.customerAccess.getNumberCustomer();
     }
+    //getLastCustomerId
+    public int getLastCustomerId() throws NextCodeCustomerException {
+        return this.customerAccess.getLastCustomerId();
+    }
 
 }
