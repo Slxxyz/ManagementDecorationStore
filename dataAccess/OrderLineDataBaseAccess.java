@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import interfaceAccess.OrderLineDataAccess;
 
+import javax.swing.*;
+
 public class OrderLineDataBaseAccess implements OrderLineDataAccess{
     @Override
     public void createOrderLine(OrderLine orderLine) throws OrderLineException {
@@ -19,7 +21,7 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
             statement.setInt(4, orderLine.getProduct());
             statement.executeUpdate();
         } catch (SQLException exception) {
-            throw new OrderLineException(exception.getMessage(), new OneException(), new CreateException());
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -48,12 +50,12 @@ public class OrderLineDataBaseAccess implements OrderLineDataAccess{
 
 
     @Override //lis toutes les orderLine d'un order
-    public ArrayList<OrderLine> readAllOrderLinesFor(int orderLineCode) throws OrderLineException {
+    public ArrayList<OrderLine> readAllOrderLinesFor(int orderCode) throws OrderLineException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String query = "SELECT * FROM orderline WHERE code = ?;";
+            String query = "SELECT * FROM orderline WHERE orderCustomer = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, orderLineCode);
+            statement.setInt(1, orderCode);
             ResultSet data = statement.executeQuery();
             ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
             while (data.next()) {
