@@ -88,6 +88,22 @@ public class OrderLinePanel extends JPanel implements ActionListener{
         return orderLinePanel;
     }
 
+
+    //retourne le model de la liste des lignes de commande
+    public void setOrderLinesForOrderCustomer(int orderCustomerCode){
+        try{
+            ArrayList<OrderLine> orderLines = this.orderLineController.readAllOrderLinesFor(orderCustomerCode);
+            this.orderLineModel.clear();
+            for(OrderLine orderLine : orderLines){
+                this.orderLineModel.addElement(orderLine);
+            }
+        }catch(OrderLineException exception){
+            JOptionPane.showMessageDialog(null, exception.getDescription(), exception.getTitle(), JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
         String source = event.getActionCommand();
@@ -96,13 +112,11 @@ public class OrderLinePanel extends JPanel implements ActionListener{
                 Product product = (Product) productComboBox.getSelectedItem();
                 int quantity = (int) productQuantityField.getValue();
                 try {
-                    int orderCustomerCode = orderCustomerController.getNumberOrderCustomer();
+                    int orderCustomerCode = orderCustomerController.getNextCode();
                     int orderLineCode = orderLineController.getNextCode();
                     OrderLine orderLine = new OrderLine(orderLineCode,quantity,orderCustomerCode,product.getCode());
                     orderLineModel.addElement(orderLine);
-                    orderLineList.setVisible(true);
-
-                } catch (NumberOrderCustomerException | NextCodeOrderLineException exception) {
+                } catch (NextCodeOrderLineException | NextCodeOrderCustomerException exception) {
                     JOptionPane.showMessageDialog(null, "Echec lors du chargement du code de la ligne de commande", "Echec du chargement", JOptionPane.ERROR_MESSAGE);
                 }
 

@@ -80,16 +80,19 @@ public class MainFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-
-//TODO: Création d'objet peut être redondante (fix: avec un State Pattern)
+    //TODO: Création d'objet peut être redondante (fix: avec un State Pattern)
 
     private JPanel getPanel(String name) {
         switch (name) {
             case "Ajout d'un client" -> {
+                //TODO: Revoir la structure du systeme de création (Probleme de synchronisation:OrderCustomer et OrderLines)
+                //TODO: Améliorer l'interface d'ajout de commande (Afficher: JTable des orderLines au fur et à mesure pour une commande spécifique)
+                //TODO: Faire des vérifications sur les champs de saisie (ex: s'assurer que le nom ne contient pas de chiffres, ...)
+                //TODO: Automatiser la gestion des points de fidélité (Tache métier ???)
                 return new AddCustomerPanel();
             }
             case "Affichage des clients" -> {
-                return new ListingCustomerPanel(); //good
+                return new ListingCustomerPanel();
             }
             case "Modification d'un client" -> {
                 return new EditCustomerPanel();
@@ -112,7 +115,6 @@ public class MainFrame extends JFrame implements ActionListener {
             }
             */
             case "Nouveaux produits" -> {
-                // TODO : Nous n'avons pas eu le temps de faire un systeme plus qualitatif :(
                 CoverPageManager[] products = {
                         new CoverPageManager("Montagne Enneigée", "../tableau.jpg","Voyager sans bouger, c'est possible désormais !"),
                         new CoverPageManager("PapyMamy Lampe", "../lampe.jpeg",    "Retour vers le passé, pour un futur lumineux !"),

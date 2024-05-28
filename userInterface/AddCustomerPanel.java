@@ -72,9 +72,9 @@ public class AddCustomerPanel extends JPanel implements ActionListener{
                     nextCode=this.getNextOrderCustomerId();
                     OrderCustomer orderCustomer = this.orderCustomerPanel.getOrderCustomer(nextCode);
                     if(orderCustomer!=null){
-                        this.customerController.createCustomer(customer);
-                        this.orderCustomerController.createOrderCustomer(orderCustomer);
                         this.orderLinePanel.updateOrderLineForOrderCustomer(orderCustomer);
+                        this.orderCustomerController.createOrderCustomer(orderCustomer);
+                        this.customerController.createCustomer(customer);
                     }else{
                         JOptionPane.showMessageDialog(null, "Lors de la création d'un client, une commande doit obligatoirement lui être associé !", "Erreur dans les informations de la commande", JOptionPane.ERROR_MESSAGE);
                     }
@@ -82,7 +82,7 @@ public class AddCustomerPanel extends JPanel implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Veuillez saisir les informations du client", "Erreur dans les informations du client", JOptionPane.ERROR_MESSAGE);
                 }
             }catch(ExceptionType exception){
-                JOptionPane.showMessageDialog(null,"BUG", exception.getTitle(), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,exception.getDescription(), exception.getTitle(), JOptionPane.ERROR_MESSAGE);
             }
         }
     }
