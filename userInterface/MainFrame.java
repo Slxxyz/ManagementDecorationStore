@@ -100,20 +100,20 @@ public class MainFrame extends JFrame implements ActionListener {
             case "Suppression d'un client" -> {
                 return new DeleteCustomerPanel();
             }
-            /*
+            
             case "Commandes" -> {
-                return new
+                return new SearchOrderCustomerPanel();
             }
             case "Produits" -> {
-                return new
+                return new SearchOrderProductPanel();
             }
             case "Fournisseurs" -> {
-                return new
+                return new SearchSupplierHistoryPanel();
             }
             case "Afficher les informations de stock" -> {
-                return new
+                return new SalesSearchPanel();
             }
-            */
+            
             case "Nouveaux produits" -> {
                 CoverPageManager[] products = {
                         new CoverPageManager("Montagne Enneigée", "../tableau.jpg","Voyager sans bouger, c'est possible désormais !"),
