@@ -57,7 +57,6 @@ public class EditCustomerPanel extends JPanel implements ActionListener{
         String lastName = customer.getLastName();
         String firstName = customer.getFirstName();
         String gender = customer.getGender();
-        int pointNb = customer.getPointNb();
         String telNumber = customer.getTelNumber();
         String mailAddress = customer.getMailAddress();
         LocalDate birthday = customer.getBirthday();
@@ -68,7 +67,6 @@ public class EditCustomerPanel extends JPanel implements ActionListener{
             this.generalPanel.setLastName(lastName);
             this.generalPanel.setFirstName(firstName);
             this.generalPanel.setGender(gender);
-            this.generalPanel.setPointNb(pointNb);
             this.generalPanel.setTelNumber(telNumber);
             this.generalPanel.setMailAddress(mailAddress);
             this.generalPanel.setBirthday(birthday);

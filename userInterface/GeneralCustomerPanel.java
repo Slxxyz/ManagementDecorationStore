@@ -6,11 +6,13 @@ import model.*;
 
 
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class GeneralCustomerPanel extends JPanel{
@@ -22,8 +24,8 @@ public class GeneralCustomerPanel extends JPanel{
     private JRadioButton isFemale;
     private JRadioButton isOther;
     private ButtonGroup genderGroup;
-    private JLabel pointNbLabel;
-    private JSpinner pointNbField;
+    //private JLabel pointNbLabel;
+    //private JSpinner pointNbField;
     private JLabel telNumberLabel;
     private JTextField telNumberField;
     private JLabel mailAddressLabel;
@@ -47,9 +49,13 @@ public class GeneralCustomerPanel extends JPanel{
 
         this.lastNameLabel = new JLabel("Nom");
         this.lastNameField = new JTextField();
+        //Filtre pour n'autoriser que les lettres
+        ((PlainDocument)this.lastNameField.getDocument()).setDocumentFilter(new LetterOnlyFilter());
 
         this.firstNameLabel = new JLabel("Prénom");
         this.firstNameField = new JTextField();
+        //Filtre pour n'autoriser que les lettres
+        ((PlainDocument)this.firstNameField.getDocument()).setDocumentFilter(new LetterOnlyFilter());
 
         this.isMale= new JRadioButton("Homme");
         this.isFemale= new JRadioButton("Femme");
@@ -61,13 +67,10 @@ public class GeneralCustomerPanel extends JPanel{
         genderGroup.add(isOther);
         this.genderGroup.setSelected(isOther.getModel(), true);
 
-
-        this.pointNbLabel = new JLabel("Nombre de points");
-        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
-        this.pointNbField = new JSpinner(spinnerModel);
-
         this.telNumberLabel = new JLabel("Numéro de téléphone");
         this.telNumberField = new JTextField();
+        //Filtre pour n'autoriser que les chiffres
+        ((PlainDocument)this.telNumberField.getDocument()).setDocumentFilter(new NumberOnlyFilter());
 
         this.mailAddressLabel = new JLabel("Adresse mail");
         this.mailAddressField = new JTextField();
@@ -87,7 +90,6 @@ public class GeneralCustomerPanel extends JPanel{
                 .addLabelAnd(lastNameLabel, lastNameField)
                 .addLabelAnd(firstNameLabel, firstNameField)
                 .addOnSameLine(new ComponentGroup(GridBagConstraints.WEST, isMale, isFemale, isOther))
-                .addLabelAnd(pointNbLabel, pointNbField)
                 .addLabelAnd(telNumberLabel, telNumberField)
                 .addLabelAnd(mailAddressLabel, mailAddressField)
                 .addLabelAnd(birthdayLabel, birthdayField)
@@ -138,14 +140,19 @@ public class GeneralCustomerPanel extends JPanel{
                 break;
         }
     }
-    public int getPointNb() {
-        return (int) this.pointNbField.getValue();
+
+
+    //format du numéro de tel
+    public String formatTelNumber(String telNumber){
+        if(telNumber.startsWith("0")){
+            return "+32"+telNumber.substring(1);
+        }else{
+            return "+32"+telNumber;
+        }
     }
-    public void setPointNb(int pointNb) {
-        this.pointNbField.setValue(pointNb);
-    }
+
     public String getTelNumber() {
-        return this.telNumberField.getText();
+        return formatTelNumber(this.telNumberField.getText());
     }
     public void setTelNumber(String telNumber) {
         this.telNumberField.setText(telNumber);
@@ -208,7 +215,7 @@ public class GeneralCustomerPanel extends JPanel{
             String firstName = this.getFirstName();
             if(!firstName.isBlank() && !firstName.isEmpty()){
                 String gender = this.getGender();
-                int pointNb = this.getPointNb();
+                int pointNb = 0;
                 String telNumber = this.getTelNumber();
                 String mailAddress = this.getMailAddress();
                 LocalDate birthday = this.getBirthday();

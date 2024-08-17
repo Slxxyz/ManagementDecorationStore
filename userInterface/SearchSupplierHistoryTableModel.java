@@ -89,4 +89,3 @@ public class SearchSupplierHistoryTableModel extends AbstractTableModel {
         this.searchSupplierDetailResults = searchSupplierDetailResults;
     }
 }
-

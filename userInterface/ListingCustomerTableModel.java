@@ -51,7 +51,7 @@ public class ListingCustomerTableModel extends AbstractTableModel{
             case 1 -> String.class;
             case 2 -> String.class;
             case 3 -> String.class;
-            case 4 -> int.class;
+            case 4 -> String.class;
             case 5 -> LocalDate.class;
             case 6 -> int.class;
             case 7 -> String.class;
@@ -70,7 +70,7 @@ public class ListingCustomerTableModel extends AbstractTableModel{
                 case 1 -> customer.getLastName();
                 case 2 -> customer.getFirstName();
                 case 3 -> customer.getGender();
-                case 4 -> customer.getCityId();
+                case 4 -> customer.getCityName(customer.getCityId());
                 case 5 -> customer.getBirthday();
                 case 6 -> customer.getPointNb();
                 case 7 -> customer.getTelNumber();

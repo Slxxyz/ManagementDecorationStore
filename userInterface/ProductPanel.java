@@ -7,6 +7,7 @@ class ProductPanel extends JPanel {
     private JLabel nameLabel;
     private JLabel descriptionLabel;
     private JLabel imageLabel;
+    private ProductDisplayThread displayThread;
 
     public ProductPanel(CoverPageManager product) {
         setLayout(new BorderLayout());
@@ -46,4 +47,10 @@ class ProductPanel extends JPanel {
         descriptionLabel.setText(product.getDescription());
         imageLabel.setIcon(new ImageIcon(product.getImage()));
     }
+
+    public ProductDisplayThread getDisplayThread() {
+        return displayThread;
+    }
+
+
 }

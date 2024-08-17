@@ -55,17 +55,27 @@ public class MainFrame extends JFrame implements ActionListener {
 
         JMenu newProductThread = new JMenu("Nouveaux produits");
         JMenuItem newProduct = new JMenuItem("Nouveaux produits");
+        JMenuItem stopProduct = new JMenuItem("Arrêter");
 
         newProductThread.addActionListener(this);
         newProduct.addActionListener(this);
+        stopProduct.addActionListener(this);
 
         newProductThread.add(newProduct);
+        newProductThread.add(stopProduct);
+
+        JMenu leave = new JMenu("Quitter");
+        JMenuItem exit = new JMenuItem("Quitter");
+        leave.addActionListener(this);
+        exit.addActionListener(this);
+        leave.add(exit);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(crud);
         menuBar.add(search);
         menuBar.add(jobTask);
         menuBar.add(newProductThread);
+        menuBar.add(leave);
 
         this.setJMenuBar(menuBar);
         this.addWindowListener(new MainFrameListener());
@@ -85,10 +95,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel getPanel(String name) {
         switch (name) {
             case "Ajout d'un client" -> {
-                //TODO: Revoir la structure du systeme de création (Probleme de synchronisation:OrderCustomer et OrderLines)
-                //TODO: Améliorer l'interface d'ajout de commande (Afficher: JTable des orderLines au fur et à mesure pour une commande spécifique)
-                //TODO: Faire des vérifications sur les champs de saisie (ex: s'assurer que le nom ne contient pas de chiffres, ...)
-                //TODO: Automatiser la gestion des points de fidélité (Tache métier ???)
                 return new AddCustomerPanel();
             }
             case "Affichage des clients" -> {
@@ -100,7 +106,6 @@ public class MainFrame extends JFrame implements ActionListener {
             case "Suppression d'un client" -> {
                 return new DeleteCustomerPanel();
             }
-            
             case "Commandes" -> {
                 return new SearchOrderCustomerPanel();
             }
@@ -113,7 +118,6 @@ public class MainFrame extends JFrame implements ActionListener {
             case "Afficher les informations de stock" -> {
                 return new SalesSearchPanel();
             }
-            
             case "Nouveaux produits" -> {
                 CoverPageManager[] products = {
                         new CoverPageManager("Montagne Enneigée", "../tableau.jpg","Voyager sans bouger, c'est possible désormais !"),
@@ -124,6 +128,22 @@ public class MainFrame extends JFrame implements ActionListener {
                 ProductDisplayThread displayThread = new ProductDisplayThread(productPanel, products);
                 displayThread.start();
                 return productPanel;
+            }
+            case "Arrêter" -> {
+                if(currentPanel instanceof ProductPanel productPanel){
+                    ProductDisplayThread displayThread = productPanel.getDisplayThread();
+                    if(displayThread != null){
+                        displayThread.stopThread();
+                    }
+                }
+                this.currentPanel = new WelcomePanel();
+                this.add(currentPanel);
+                this.revalidate();
+                this.repaint();
+                return currentPanel;
+            }
+            case "Quitter" -> {
+                System.exit(0);
             }
         }
         return null;
