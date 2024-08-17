@@ -189,18 +189,4 @@ public class SearchDataBaseAccess implements SearchDataAccess {
 
         return salesResults;
     }
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-

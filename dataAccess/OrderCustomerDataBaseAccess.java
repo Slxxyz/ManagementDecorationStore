@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import interfaceAccess.OrderCustomerDataAccess;
 
+import javax.swing.*;
+
 public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
 
     @Override
@@ -20,7 +22,8 @@ public class OrderCustomerDataBaseAccess implements OrderCustomerDataAccess {
             statement.setInt(4, orderCustomer.getCustomer());
             statement.executeUpdate();
         } catch (SQLException exception) {
-            throw new OrderCustomerException(exception.getMessage(), new OneException(), new CreateException());
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            //throw new OrderCustomerException(exception.getMessage(), new OneException(), new CreateException());
         }
     }
     @Override
