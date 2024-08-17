@@ -39,4 +39,3 @@ public class SearchSupplierDetailResult {
         return productCode;
     }
 }
-

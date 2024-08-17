@@ -58,14 +58,3 @@ public class SearchOrderLineResult {
         return lastname;
     }
 }
-
-
-
-
-
-
-
-
-
-
-

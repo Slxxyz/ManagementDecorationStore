@@ -74,4 +74,9 @@ public class Supplier {
         }
     }
 
+    @Override
+    public String toString() {
+        return legalName;
+    }
+
 }

@@ -46,14 +46,3 @@ public class SearchOrderLineResults {
         return productCategory;
     }
 }
-
-
-
-
-
-
-
-
-
-
-

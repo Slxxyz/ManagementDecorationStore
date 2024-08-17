@@ -1,5 +1,9 @@
 package model;
 
+
+import controller.CityController;
+import exception.CityException;
+
 import java.time.LocalDate;
 
 public class Customer {
@@ -66,6 +70,8 @@ public class Customer {
     public int getCityId() {
         return cityId;
     }
+
+
     //////////////////////////////////////////////////////////////////SETTERS
     public void setNumber(int numberCustomer) {
         this.numberCustomer = numberCustomer;
@@ -113,6 +119,16 @@ public class Customer {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////
+
+    // Fonction qui permet de retourner le nom de la ville
+    public String getCityName(int cityId) throws CityException {
+        CityController cityController = new CityController();
+        return cityController.readCity(cityId).getCityName();
     }
 
     @Override
