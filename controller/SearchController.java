@@ -35,13 +35,13 @@ public class SearchController {
         return this.manager.searchEachOrderOfCustomer(number,startDate,endDate);
     }
 
-   public Map<Integer, SearchOrderCustomerResults> searchEachOrderOfProduct(int productCode, LocalDate startDate, LocalDate endDate) throws SQLException{
+    public Map<Integer, SearchOrderCustomerResults> searchEachOrderOfProduct(int productCode, LocalDate startDate, LocalDate endDate) throws SQLException{
         return this.manager.searchEachOrderOfProduct(productCode,startDate,endDate);
-   }
+    }
 
 
-        public List<SalesSearchResult> searchSalesBetweenDates(LocalDate startDate, LocalDate endDate) throws SQLException{
-            return this.manager.searchSalesBetweenDates(startDate,endDate);
+    public List<SalesSearchResult> searchSalesBetweenDates(LocalDate startDate, LocalDate endDate) throws SQLException{
+        return this.manager.searchSalesBetweenDates(startDate,endDate);
 
     }
 
