@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchOrderCustomerTableModel extends AbstractTableModel {
-    private final String[] columnNames = {"Order Code", "Order Date", "Payment Method", "Product Label", "Quantity", "Product Price", "Product Category"};
+    private final String[] columnNames = {"Code de la commande", "Date", "Méthode de payement", "Nom du produit", "Quantité", "Prix du produit", "Catégorie du produit"};
     private final List<Object[]> tableData;
 
     public SearchOrderCustomerTableModel(Map<Integer, SearchOrderCustomerResult> searchOrderCustomerResults) {
