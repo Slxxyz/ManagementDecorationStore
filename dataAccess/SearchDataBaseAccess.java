@@ -177,7 +177,7 @@ public class SearchDataBaseAccess implements SearchDataAccess {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 LocalDate date = resultSet.getDate("saleDate").toLocalDate();
-                double salesAmount = resultSet.getDouble("salesAmount");
+                int salesAmount = resultSet.getInt("salesAmount");
                 SalesSearchResult result = new SalesSearchResult(date, salesAmount);
                 salesResults.add(result);
             }
@@ -189,4 +189,18 @@ public class SearchDataBaseAccess implements SearchDataAccess {
 
         return salesResults;
     }
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
