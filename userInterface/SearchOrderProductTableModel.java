@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class SearchOrderProductTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = {"Order Code", "Order Date", "Payment Method", "Customer Last Name", "Customer First Name", "Order Line Code", "Quantity", "Product Label", "Product Price", "Product Category"};
+    private final String[] columnNames = {"Code de la commande", "Date de la commande", "Méthode de payement", "Nom client", "Prénom client ", "Quantité", "Nom du produit", "Prix du produit", "Catégorie du produit"};
     private final List<Object[]> tableData;
 
     public SearchOrderProductTableModel(Map<Integer, SearchOrderCustomerResults> orders) {
@@ -23,7 +23,6 @@ public class SearchOrderProductTableModel extends AbstractTableModel {
                         orderResult.getMethodOfPayment(),
                         lineResult.getLastname(),
                         lineResult.getFirstName(),
-                        lineResult.getOrderLineCode(),
                         lineResult.getQuantity(),
                         lineResult.getProductLabel(),
                         lineResult.getProductPrice(),
