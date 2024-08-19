@@ -22,7 +22,7 @@ class ProductDisplayThread extends Thread {
                     productPanel.setProduct(products[currentIndex]);
                     currentIndex = (currentIndex + 1) % products.length; // Mettre à jour l'indice du produit
                 });
-                Thread.sleep(3000);
+                Thread.sleep(2500);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

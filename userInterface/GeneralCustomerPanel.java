@@ -11,8 +11,9 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
+
 
 
 public class GeneralCustomerPanel extends JPanel{
@@ -24,8 +25,6 @@ public class GeneralCustomerPanel extends JPanel{
     private JRadioButton isFemale;
     private JRadioButton isOther;
     private ButtonGroup genderGroup;
-    //private JLabel pointNbLabel;
-    //private JSpinner pointNbField;
     private JLabel telNumberLabel;
     private JTextField telNumberField;
     private JLabel mailAddressLabel;
@@ -49,13 +48,17 @@ public class GeneralCustomerPanel extends JPanel{
 
         this.lastNameLabel = new JLabel("Nom");
         this.lastNameField = new JTextField();
-        //Filtre pour n'autoriser que les lettres
-        ((PlainDocument)this.lastNameField.getDocument()).setDocumentFilter(new LetterOnlyFilter());
+        //Filtre pour n'autoriser que les lettres et une longueur de 15
+        PlainDocument lastNameDoc = (PlainDocument) this.lastNameField.getDocument();
+        lastNameDoc.setDocumentFilter(new CompositeFilter(new LetterOnlyFilter(), new LengthFilter(15)));
+
 
         this.firstNameLabel = new JLabel("Prénom");
         this.firstNameField = new JTextField();
-        //Filtre pour n'autoriser que les lettres
-        ((PlainDocument)this.firstNameField.getDocument()).setDocumentFilter(new LetterOnlyFilter());
+        //Filtre pour n'autoriser que les lettres et une longueur de 15
+        PlainDocument firstNameDoc = (PlainDocument) this.firstNameField.getDocument();
+        firstNameDoc.setDocumentFilter(new CompositeFilter(new LetterOnlyFilter(), new LengthFilter(15)));
+
 
         this.isMale= new JRadioButton("Homme");
         this.isFemale= new JRadioButton("Femme");
@@ -69,16 +72,37 @@ public class GeneralCustomerPanel extends JPanel{
 
         this.telNumberLabel = new JLabel("Numéro de téléphone");
         this.telNumberField = new JTextField();
-        //Filtre pour n'autoriser que les chiffres
-        ((PlainDocument)this.telNumberField.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+        //Filtre pour n'autoriser que les chiffres et une longueur de 10
+        PlainDocument telNumberDoc = (PlainDocument) this.telNumberField.getDocument();
+        telNumberDoc.setDocumentFilter(new CompositeFilter(new NumberOnlyFilter(), new LengthFilter(10)));
 
         this.mailAddressLabel = new JLabel("Adresse mail");
         this.mailAddressField = new JTextField();
+        //Filtre pour n'autoriser que 50 caractères
+        PlainDocument mailAddressDoc = (PlainDocument) this.mailAddressField.getDocument();
+        mailAddressDoc.setDocumentFilter(new LengthFilter(50));
 
         this.birthdayLabel = new JLabel("Date de naissance");
-        birthdayField = new JSpinner(new SpinnerDateModel());
+
+        // Obtention de la date actuelle
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        // Calcul de la date maximale autorisée (18 ans en arrière)
+        calendar.add(Calendar.YEAR, -18);
+        Date maxDate = calendar.getTime();
+
+        // Création du modèle pour le spinner avec la date maximale
+        SpinnerDateModel dateModel = new SpinnerDateModel(maxDate, null, maxDate, Calendar.DAY_OF_MONTH);
+        birthdayField = new JSpinner(dateModel);
+
+        // Définition du format de date
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(birthdayField, "yyyy-MM-dd");
         birthdayField.setEditor(dateEditor);
+
+        // Désactiver l'édition manuelle dans le JSpinner
+        JFormattedTextField tf = ((JSpinner.DefaultEditor) birthdayField.getEditor()).getTextField();
+        tf.setEditable(false);
 
         this.isMarried = new JCheckBox("Marié(e)");
 
@@ -147,7 +171,12 @@ public class GeneralCustomerPanel extends JPanel{
         if(telNumber.startsWith("0")){
             return "+32"+telNumber.substring(1);
         }else{
-            return "+32"+telNumber;
+            if(!telNumber.isBlank()||!telNumber.isEmpty()){
+                return "+32"+telNumber;
+            }else{
+                return "";
+            }
+
         }
     }
 
@@ -250,6 +279,20 @@ public class GeneralCustomerPanel extends JPanel{
             JOptionPane.showMessageDialog(null,"Une erreur s'est produite lors de la lecture des données de la ville.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    //Effacer les champs du formulaire
+    public void resetFields(){
+        this.lastNameField.setText("");
+        this.firstNameField.setText("");
+        this.genderGroup.setSelected(isOther.getModel(), true);
+        this.telNumberField.setText("");
+        this.mailAddressField.setText("");
+        this.birthdayField.setValue(new Date());
+        this.isMarried.setSelected(false);
+        this.cityComboBox.setSelectedIndex(0);
+    }
+
+
     public JPanel getPanel(){
         return this.generalPanel;
     }

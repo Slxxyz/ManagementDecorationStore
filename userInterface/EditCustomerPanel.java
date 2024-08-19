@@ -90,9 +90,8 @@ public class EditCustomerPanel extends JPanel implements ActionListener{
     private void updateCustomer(Customer selectedCustomer){
         try{
             Customer customer = this.generalPanel.getCustomer(selectedCustomer.getNumber());
-            if(customer!=null){
-                this.customerController.updateCustomer(customer);
-            }
+            customer.setPointNb(selectedCustomer.getPointNb());
+            this.customerController.updateCustomer(customer);
 
         }catch(ExceptionType exception){
             JOptionPane.showMessageDialog(null, exception.getDescription(), exception.getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -114,6 +113,7 @@ public class EditCustomerPanel extends JPanel implements ActionListener{
                     this.updateCustomer(selectedCustomer);
                     this.customerSelectionComboBoxModel.removeAllElements();
                     this.setAllCustomers();
+                    this.generalPanel.resetFields();
                 }else{
                     JOptionPane.showMessageDialog(null, "Vous devez selectionner un client", "Selectionner un client", JOptionPane.ERROR_MESSAGE);
                 }

@@ -80,6 +80,7 @@ public class AddCustomerPanel extends JPanel implements ActionListener{
                             this.orderLineController.createOrderLine(orderLine);
                         }
                         JOptionPane.showMessageDialog(null, "Le client a été ajouté avec succès", "Succès de l'ajout", JOptionPane.INFORMATION_MESSAGE);
+                        this.generalPanel.resetFields();
                         this.orderCustomerPanel.resetFields();
                     }else{
                         JOptionPane.showMessageDialog(null, "Lors de la création d'un client, une commande doit obligatoirement lui être associé !", "Erreur dans les informations de la commande", JOptionPane.ERROR_MESSAGE);

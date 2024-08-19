@@ -21,7 +21,11 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
     private static final int MAX_QUANTITY_PRODUCT = 15;
 
     private JLabel methodOfPaymentLabel;
-    private JTextField methodOfPaymentField;
+    private JRadioButton isCard;
+    private JRadioButton isCash;
+    private JRadioButton isCheque;
+
+    private ButtonGroup paymentMethodGroup;
     private SpinnerNumberModel productQuantityModel;
     private JSpinner productQuantityField;
     private DefaultComboBoxModel<Product> productComboBoxModel;
@@ -47,10 +51,21 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
         this.productController = new ProductController();
 
         this.methodOfPaymentLabel = new JLabel("Moyen de paiement");
-        this.methodOfPaymentField = new JTextField();
+        this.isCash= new JRadioButton("Espèces");
+        this.isCard= new JRadioButton("Carte");
+        this.isCheque= new JRadioButton("Chèque");
+
+        this.paymentMethodGroup= new ButtonGroup();
+        paymentMethodGroup.add(isCash);
+        paymentMethodGroup.add(isCard);
+        paymentMethodGroup.add(isCheque);
+        this.paymentMethodGroup.setSelected(isCash.getModel(), true);
+
 
         this.productQuantityModel = new SpinnerNumberModel(MIN_QUANTITY_PRODUCT, MIN_QUANTITY_PRODUCT, MAX_QUANTITY_PRODUCT, 1);
         this.productQuantityField = new JSpinner(productQuantityModel);
+        JFormattedTextField textField = ((JSpinner.DefaultEditor) this.productQuantityField.getEditor()).getTextField();
+        textField.setEditable(false);
 
         this.productComboBoxModel = new DefaultComboBoxModel<Product>();
         this.productComboBox = new JComboBox<Product>(productComboBoxModel);
@@ -67,11 +82,13 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
         JPanel orderLineNorthPanel = new JPanel();
         orderLineNorthPanel.setLayout(new GridLayout(1, 2));
         orderLineNorthPanel.add(methodOfPaymentLabel);
-        orderLineNorthPanel.add(methodOfPaymentField);
+        orderLineNorthPanel.add(isCash);
+        orderLineNorthPanel.add(isCard);
+        orderLineNorthPanel.add(isCheque);
 
 
         JPanel orderLineSouthPanel = new JPanel();
-        orderLineSouthPanel.setLayout(new GridLayout(1, 1));
+        orderLineSouthPanel.setLayout(new GridLayout(1, 2));
         orderLineNorthPanel.add(productComboBox);
         orderLineNorthPanel.add(productQuantityField);
         orderLineNorthPanel.add(addProductButton);
@@ -80,6 +97,7 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
         this.orderPanel.add(orderLineSouthPanel, BorderLayout.CENTER);
 
         this.add(orderPanel, BorderLayout.CENTER);
+
 
     }
     private void setAllProducts(){
@@ -97,7 +115,15 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
     }
 
     public String getMethodOfPayment(){
-        return methodOfPaymentField.getText();
+        if(isCard.isSelected()){
+            return "Carte";
+        }else{
+            if(isCash.isSelected()) {
+                return "Espèces";
+            } else{
+                return "Chèque";
+            }
+        }
     }
 
     public ArrayList<OrderLine> getOrderLines(){
@@ -128,18 +154,14 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
     }
 
     protected OrderCustomer getOrderCustomer(int nextCode) {
-        String methodOfPayment = methodOfPaymentField.getText();
-        if(!methodOfPayment.isBlank() && !methodOfPayment.isEmpty()){
-            Timestamp dateAndTime = new Timestamp(System.currentTimeMillis());
-            try {
-                int currentCustomerCode = customerController.getNextCode();
-                return new OrderCustomer(nextCode, dateAndTime, methodOfPayment, currentCustomerCode);
-            } catch (NextCodeCustomerException e) {
-                JOptionPane.showMessageDialog(null, "Veuillez réessayer ultérieurement... code:500", "Erreur lors de la creation de la commande", JOptionPane.ERROR_MESSAGE);
-            }
-
+        String methodOfPayment = this.getMethodOfPayment();
+        Timestamp dateAndTime = new Timestamp(System.currentTimeMillis());
+        try {
+            int currentCustomerCode = customerController.getNextCode();
+            return new OrderCustomer(nextCode, dateAndTime, methodOfPayment, currentCustomerCode);
+        } catch (NextCodeCustomerException e) {
+            JOptionPane.showMessageDialog(null, "Veuillez réessayer ultérieurement... code:500", "Erreur lors de la creation de la commande", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Vous devez saisir un moyen de payement !", "Erreur dans la commande", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     @Override
@@ -169,7 +191,7 @@ public class OrderCustomerPanel extends JPanel implements ActionListener {
     }
     //Réinitialiser les champs du formulaire et la liste des produits
     public void resetFields(){
-        this.methodOfPaymentField.setText("");
+        this.paymentMethodGroup.setSelected(isCash.getModel(), true);
         this.productQuantityField.setValue(MIN_QUANTITY_PRODUCT);
         this.productComboBox.setSelectedIndex(0);
         this.orderLineModel.removeAllElements();
