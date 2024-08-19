@@ -46,12 +46,12 @@ public class MainFrame extends JFrame implements ActionListener {
         search.add(supplier);
 
         JMenu jobTask = new JMenu("Tâche Métier");
-        JMenuItem stockInformation = new JMenuItem("Afficher les informations de stock");
+        JMenuItem turnover = new JMenuItem("Chiffre d'affaire");
 
         jobTask.addActionListener(this);
-        stockInformation.addActionListener(this);
+        turnover.addActionListener(this);
 
-        jobTask.add(stockInformation);
+        jobTask.add(turnover);
 
         JMenu newProductThread = new JMenu("Nouveaux produits");
         JMenuItem newProduct = new JMenuItem("Nouveaux produits");
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements ActionListener {
             case "Fournisseurs" -> {
                 return new SearchSupplierHistoryPanel();
             }
-            case "Afficher les informations de stock" -> {
+            case "Afficher le chiffre d'affaire" -> {
                 return new SalesSearchPanel();
             }
             case "Nouveaux produits" -> {
