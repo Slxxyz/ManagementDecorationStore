@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class SalesSearchResult {
     private LocalDate date;
-    private double salesAmount;
+    private int salesAmount;
 
-    public SalesSearchResult(LocalDate date, double salesAmount) {
+    public SalesSearchResult(LocalDate date, int salesAmount) {
         this.date = date;
         this.salesAmount = salesAmount;
     }
@@ -16,7 +16,7 @@ public class SalesSearchResult {
         return date;
     }
 
-    public double getSalesAmount() {
+    public int getSalesAmount() {
         return salesAmount;
     }
 
@@ -25,7 +25,7 @@ public class SalesSearchResult {
         this.date = date;
     }
 
-    public void setSalesAmount(double salesAmount) {
+    public void setSalesAmount(int salesAmount) {
         this.salesAmount = salesAmount;
     }
 }
