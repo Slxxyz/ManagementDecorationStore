@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements ActionListener {
         search.add(supplier);
 
         JMenu jobTask = new JMenu("Tâche Métier");
-        JMenuItem turnover = new JMenuItem("Chiffre d'affaire");
+        JMenuItem turnover = new JMenuItem("Afficher le chiffre d'affaire");
 
         jobTask.addActionListener(this);
         turnover.addActionListener(this);
